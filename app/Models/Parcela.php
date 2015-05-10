@@ -8,6 +8,7 @@ class Parcela extends Model {
 
 	protected $table = 'parcelas';
 	public $timestamps = true;
+	protected $fillable = array('id_planta');
 
 	public function sitio()
 	{
@@ -17,6 +18,11 @@ class Parcela extends Model {
 	public function tomasSuelos()
 	{
 		return $this->hasMany('App\Models\TomaSuelo', 'parcela_id');
+	}
+
+	public function tipoPlanta()
+	{
+		return $this->belongsTo('App\Models\TipoPlanta');
 	}
 
 }

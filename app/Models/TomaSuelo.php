@@ -13,6 +13,7 @@ class TomaSuelo extends Model {
 	use SoftDeletes;
 
 	protected $dates = ['deleted_at'];
+	protected $fillable = array('total_sedimentos_muestra', 'total_sedimentos_seco');
 
 	public function parcela()
 	{
@@ -22,16 +23,6 @@ class TomaSuelo extends Model {
 	public function sitio()
 	{
 		return $this->belongsTo('App\Models\Sitio');
-	}
-
-	public function muestrasSuelos()
-	{
-		return $this->hasMany('App\Models\MuestraSuelo', 'toma_suelo_id');
-	}
-
-	public function medidasEstacas()
-	{
-		return $this->hasMany('App\Models\MedidaEstaca', 'toma_suelo_id');
 	}
 
 	public function user()

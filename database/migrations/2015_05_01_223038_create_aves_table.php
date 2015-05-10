@@ -3,22 +3,21 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateSitiosTable extends Migration {
+class CreateAvesTable extends Migration {
 
 	public function up()
 	{
-		Schema::create('sitios', function(Blueprint $table) {
+		Schema::create('aves', function(Blueprint $table) {
 			$table->increments('id');
+			$table->string('especie', 50);
+			$table->string('genero', 50);
 			$table->timestamps();
 			$table->softDeletes();
-			$table->string('name', 60);
-			$table->float('lat', 10,6)->nullable();
-			$table->float('lng', 10,6)->nullable();
 		});
 	}
 
 	public function down()
 	{
-		Schema::drop('sitios');
+		Schema::drop('aves');
 	}
 }

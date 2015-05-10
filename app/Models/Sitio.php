@@ -13,6 +13,7 @@ class Sitio extends Model {
 	use SoftDeletes;
 
 	protected $dates = ['deleted_at'];
+	protected $fillable = array('address');
 
 	public function tomasAves()
 	{

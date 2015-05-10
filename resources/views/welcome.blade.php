@@ -10,7 +10,7 @@
 				padding: 0;
 				width: 100%;
 				height: 100%;
-				color: #B0BEC5;
+				color: #B7A6A6;
 				display: table;
 				font-weight: 100;
 				font-family: 'Lato';
@@ -35,12 +35,16 @@
 			.quote {
 				font-size: 24px;
 			}
+			.title a{
+				text-decoration: none;	
+				color: #B7A6A6;		
+			}
 		</style>
 	</head>
 	<body>
 		<div class="container">
 			<div class="content">
-				<div class="title">Uforms</div>
+				<div class="title col-lg-12"><a href="/home">Proyecto Río Torres</a></div>
 				<div class="quote">{{ Inspiring::quote() }}</div>
 			</div>
 		</div>

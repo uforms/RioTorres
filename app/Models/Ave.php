@@ -13,11 +13,7 @@ class Ave extends Model {
 	use SoftDeletes;
 
 	protected $dates = ['deleted_at'];
-	protected $fillable = [
-		'id',
-		'genero',
-		'especie',
-	];
+	protected $fillable = array('id', 'especie', 'genero');
 
 	public function tomasAves()
 	{

@@ -43,6 +43,11 @@ class CreateForeignKeys extends Migration {
 						->onDelete('restrict')
 						->onUpdate('restrict');
 		});
+		Schema::table('parcelas', function(Blueprint $table) {
+			$table->foreign('id_planta')->references('id')->on('tipos_plantas')
+						->onDelete('restrict')
+						->onUpdate('restrict');
+		});
 		Schema::table('tomas_suelos', function(Blueprint $table) {
 			$table->foreign('parcela_id')->references('id')->on('parcelas')
 						->onDelete('restrict')
@@ -55,21 +60,6 @@ class CreateForeignKeys extends Migration {
 		});
 		Schema::table('tomas_suelos', function(Blueprint $table) {
 			$table->foreign('user_id')->references('id')->on('users')
-						->onDelete('restrict')
-						->onUpdate('restrict');
-		});
-		Schema::table('muestras_suelos', function(Blueprint $table) {
-			$table->foreign('toma_suelo_id')->references('id')->on('tomas_suelos')
-						->onDelete('restrict')
-						->onUpdate('restrict');
-		});
-		Schema::table('muestras_suelos_lab', function(Blueprint $table) {
-			$table->foreign('muestra_suelo_id')->references('id')->on('muestras_suelos')
-						->onDelete('restrict')
-						->onUpdate('restrict');
-		});
-		Schema::table('medidas_estacas', function(Blueprint $table) {
-			$table->foreign('toma_suelo_id')->references('id')->on('tomas_suelos')
 						->onDelete('restrict')
 						->onUpdate('restrict');
 		});
@@ -223,6 +213,11 @@ class CreateForeignKeys extends Migration {
 						->onDelete('restrict')
 						->onUpdate('restrict');
 		});
+		Schema::table('imagenes_aves', function(Blueprint $table) {
+			$table->foreign('toma_ave_id')->references('id')->on('tomas_aves')
+						->onDelete('restrict')
+						->onUpdate('restrict');
+		});
 	}
 
 	public function down()
@@ -248,6 +243,9 @@ class CreateForeignKeys extends Migration {
 		Schema::table('parcelas', function(Blueprint $table) {
 			$table->dropForeign('parcelas_sitio_id_foreign');
 		});
+		Schema::table('parcelas', function(Blueprint $table) {
+			$table->dropForeign('parcelas_id_planta_foreign');
+		});
 		Schema::table('tomas_suelos', function(Blueprint $table) {
 			$table->dropForeign('tomas_suelos_parcela_id_foreign');
 		});
@@ -256,15 +254,6 @@ class CreateForeignKeys extends Migration {
 		});
 		Schema::table('tomas_suelos', function(Blueprint $table) {
 			$table->dropForeign('tomas_suelos_user_id_foreign');
-		});
-		Schema::table('muestras_suelos', function(Blueprint $table) {
-			$table->dropForeign('muestras_suelos_toma_suelo_id_foreign');
-		});
-		Schema::table('muestras_suelos_lab', function(Blueprint $table) {
-			$table->dropForeign('muestras_suelos_lab_muestra_suelo_id_foreign');
-		});
-		Schema::table('medidas_estacas', function(Blueprint $table) {
-			$table->dropForeign('medidas_estacas_toma_suelo_id_foreign');
 		});
 		Schema::table('valores_cauces', function(Blueprint $table) {
 			$table->dropForeign('valores_cauces_generalidad_id_foreign');
@@ -355,6 +344,9 @@ class CreateForeignKeys extends Migration {
 		});
 		Schema::table('fisico_quimicos', function(Blueprint $table) {
 			$table->dropForeign('fisico_quimicos_toma_agua_id_foreign');
+		});
+		Schema::table('imagenes_aves', function(Blueprint $table) {
+			$table->dropForeign('imagenes_aves_toma_ave_id_foreign');
 		});
 	}
 }

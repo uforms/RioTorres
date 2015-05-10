@@ -5,18 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class MedidaEstaca extends Model {
+class ImagenAve extends Model {
 
-	protected $table = 'medidas_estacas';
+	protected $table = 'imagenes_aves';
 	public $timestamps = true;
 
 	use SoftDeletes;
 
 	protected $dates = ['deleted_at'];
+	protected $fillable = array('nombre', 'url', 'toma_ave_id');
 
-	public function tomaSuelo()
+	public function tomaAgua()
 	{
-		return $this->belongsTo('App\Models\TomaSuelo');
+		return $this->belongsTo('App\Models\TomaAve');
 	}
 
 }

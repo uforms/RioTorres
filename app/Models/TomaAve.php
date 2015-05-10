@@ -13,13 +13,15 @@ class TomaAve extends Model {
 	use SoftDeletes;
 
 	protected $dates = ['deleted_at'];
-	protected $fillable = [
+
+	protected $fillable = 
+	[
 		'ave_id',
-		'epoca_id',
 		'medida_biometrica_id',
 		'examen_general_id',
 		'sitio_id',
 		'user_id',
+		'epoca_id',
 		'observaciones',
 	];
 
@@ -51,6 +53,11 @@ class TomaAve extends Model {
 	public function epoca()
 	{
 		return $this->belongsTo('App\Models\Epoca');
+	}
+
+	public function imagenesAves()
+	{
+		return $this->hasMany('App\Models\ImagenAve', 'toma_ave_id');
 	}
 
 }

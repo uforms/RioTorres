@@ -9,16 +9,16 @@ class CreateMedidasBiometricasTable extends Migration {
 	{
 		Schema::create('medidas_biometricas', function(Blueprint $table) {
 			$table->increments('id');
-			$table->timestamps();
-			$table->softDeletes();
 			$table->float('peso', 8,2);
 			$table->float('ala', 8,2);
 			$table->integer('plumaje');
 			$table->string('edad', 2);
 			$table->string('sexo', 2);
 			$table->string('anillo', 255);
-			$table->tinyInteger('muestra_endoparacito');
-			$table->tinyInteger('muestra_ectoparacito');
+			$table->tinyInteger('muestra_endoparasito');
+			$table->tinyInteger('muestra_ectoparasito');
+			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 
