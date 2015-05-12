@@ -56,14 +56,14 @@ class AvesController extends Controller {
 	 */
 	public function store()
 	{
-		$input = Request::all();
+	$input = Request::all();
 		
 		//Validacion de los datos
 		$validator = Validator::make($input, [
 			'id'		=>	'integer',
 	        'especie' 	=> 	'string',
 	        'genero'	=> 	'string',
-	        'fecha'		=>	'string',
+	        'fecha'		=>	'date',
 	        'red'		=>	'integer',
 	        'oj'		=>	'integer',
 	        'cao'		=>	'integer',
@@ -84,7 +84,7 @@ class AvesController extends Controller {
 
 
     	]);
-
+		
     	if ($validator->fails())
 	    {
 	    	$errors = $validator->errors();

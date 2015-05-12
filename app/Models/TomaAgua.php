@@ -14,6 +14,18 @@ class TomaAgua extends Model {
 
 	protected $dates = ['deleted_at'];
 
+	protected $fillable = [
+				'sitio_id',
+				'user_id',
+				'hora_inicial',
+				'hora_final',
+				'humedad',
+				'temperatura',
+				'viento',
+				'observaciones',
+				'coliformes',
+	];
+
 	public function generalidad()
 	{
 		return $this->hasOne('App\Models\Generalidad', 'toma_agua_id');

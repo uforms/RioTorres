@@ -14,6 +14,10 @@ class Vegetacion extends Model {
 
 	protected $dates = ['deleted_at'];
 
+	protected $fillable = [
+				'toma_agua_id'
+	];
+
 	public function porcentajesExposicionCauce()
 	{
 		return $this->hasMany('App\Models\PorcentajeExposicionCauce', 'vegetacion_id');

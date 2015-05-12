@@ -20,7 +20,6 @@ class CreateFisicoQuimicosTable extends Migration {
 			$table->float('conductividad');
 			$table->float('sst');
 			$table->float('salinidad');
-			$table->tinyInteger('coliformes');
 		});
 	}
 

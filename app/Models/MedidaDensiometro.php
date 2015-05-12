@@ -10,6 +10,14 @@ class MedidaDensiometro extends Model {
 	protected $table = 'medidas_densiometro';
 	public $timestamps = true;
 
+	protected $fillable = [
+			'norte',
+			'sur',
+			'este',
+			'oeste',
+			'toma_agua_id'
+	];
+
 	use SoftDeletes;
 
 	protected $dates = ['deleted_at'];

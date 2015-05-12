@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>Uforms</title>
+		<title>Proyecto Río Torres</title>
 		
 		<link href='//fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
 

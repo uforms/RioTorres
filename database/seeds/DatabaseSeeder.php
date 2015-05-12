@@ -16,6 +16,11 @@ use App\Models\TrabajoIngenieril;
 use App\Models\TipoExposicionCauce;
 use App\Models\TipoRibera;
 use App\Models\ParametroNivel;
+use App\Models\TipoAmbienteAsociado;
+use App\Models\PresenciaRs;
+use App\Models\ContPuntual;
+use App\Models\ColorAgua;
+use App\Models\OlorAgua;
 
 class DatabaseSeeder extends Seeder {
 
@@ -28,20 +33,25 @@ class DatabaseSeeder extends Seeder {
 	{
 		Model::unguard();
 
-		//$this->call('SitioTableSeeder');
-		//$this->call('EpocasTableSeeder');
-		//$this->call('ParcelasTableSeeder');
-		//$this->call('ClimasTableSedder');
-		//$this->call('CursoTableSedder');
-		//$this->call('TipoCauceTableSedder');
-		//$this->call('EstructuraBancoTableSeeder');
-		//$this->call('TipoSustratoTableSeeder');
-		//$this->call('TipoCondicionSustratoTableSeeder');
-		//$this->call('MoTableSeeder');
-		//$this->call('TrabajoIngenierilTableSeeder');
-		//$this->call('TipoExposicionCauceTableSeeder');
-		//$this->call('TipoRiberaTableSeeder');
+		$this->call('SitioTableSeeder');
+		$this->call('EpocasTableSeeder');
+		$this->call('ParcelasTableSeeder');
+		$this->call('ClimasTableSedder');
+		$this->call('CursoTableSedder');
+		$this->call('TipoCauceTableSedder');
+		$this->call('EstructuraBancoTableSeeder');
+		$this->call('TipoSustratoTableSeeder');
+		$this->call('TipoCondicionSustratoTableSeeder');
+		$this->call('MoTableSeeder');
+		$this->call('TrabajoIngenierilTableSeeder');
+		$this->call('TipoExposicionCauceTableSeeder');
+		$this->call('TipoRiberaTableSeeder');
 		$this->call('ParametroNivelTableSeeder');
+		$this->call('TipoAmbienteAsociadoTableSeeder');
+		$this->call('PresenciaRSTableSeeder');
+		$this->call('ContPuntualTableSeeder');
+		$this->call('ColorAguaTableSeeder');
+		$this->call('OlorAguaTableSeeder');
 	}
 
 }
@@ -223,5 +233,69 @@ class ParametroNivelTableSeeder extends Seeder
 		ParametroNivel::create(['nombre' => 'Precipitación']);
 		ParametroNivel::create(['nombre' => 'Bombeo']);
 		ParametroNivel::create(['nombre' => 'Inundación']);
+	}
+}
+
+class TipoAmbienteAsociadoTableSeeder extends Seeder
+{
+	public function run(){
+		DB::table('tipos_ambientes_asociados');
+
+		TipoAmbienteAsociado::create(['nombre' => 'Naturales']);
+		TipoAmbienteAsociado::create(['nombre' => 'Agrícola']);
+		TipoAmbienteAsociado::create(['nombre' => 'Industrial']);
+		TipoAmbienteAsociado::create(['nombre' => 'Residencial']);
+	}
+}
+
+class PresenciaRSTableSeeder extends Seeder
+{
+	public function run(){
+		DB::table('presencia_rs');
+
+		PresenciaRs::create(['nombre' => 'Espumas']);
+		PresenciaRs::create(['nombre' => 'Aceites']);
+		PresenciaRs::create(['nombre' => 'Organismos muertos']);
+		PresenciaRs::create(['nombre' => 'Residuos  sólidos']);
+		PresenciaRs::create(['nombre' => 'Otro']);
+	}
+}
+
+class ContPuntualTableSeeder extends Seeder
+{
+	public function run(){
+		DB::table('cont_puntual');
+
+		ContPuntual::create(['nombre' => 'Doméstica']);
+		ContPuntual::create(['nombre' => 'Industrial']);
+		ContPuntual::create(['nombre' => 'Agrícola']);
+		ContPuntual::create(['nombre' => 'Desagües']);
+		ContPuntual::create(['nombre' => 'Otro']);
+	}
+}
+
+class ColorAguaTableSeeder extends Seeder
+{
+	public function run(){
+		DB::table('colores_agua');
+
+		ColorAgua::create(['nombre' => 'Transparente']);
+		ColorAgua::create(['nombre' => 'Grisácea']);
+		ColorAgua::create(['nombre' => 'Celeste']);
+		ColorAgua::create(['nombre' => 'Negra']);
+		ColorAgua::create(['nombre' => 'Otro']);
+	}
+}
+
+class OlorAguaTableSeeder extends Seeder
+{
+	public function run(){
+		DB::table('olores_agua');
+
+		OlorAgua::create(['nombre' => 'Natural']);
+		OlorAgua::create(['nombre' => 'Aguas grises']);
+		OlorAgua::create(['nombre' => 'Aguas negras']);
+		OlorAgua::create(['nombre' => 'In. Det.']);
+		OlorAgua::create(['nombre' => 'Otro']);
 	}
 }

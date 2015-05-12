@@ -11,7 +11,6 @@ class CreateVegetacionesTable extends Migration {
 			$table->increments('id');
 			$table->timestamps();
 			$table->softDeletes();
-			$table->text('comentario');
 			$table->integer('toma_agua_id')->unsigned();
 		});
 	}

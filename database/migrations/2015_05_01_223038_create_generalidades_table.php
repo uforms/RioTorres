@@ -13,6 +13,7 @@ class CreateGeneralidadesTable extends Migration {
 			$table->integer('curso_id')->unsigned();
 			$table->integer('parametro_nivel_id')->unsigned();
 			$table->integer('estructuras_banco_id')->unsigned();
+			$table->string('observacion_estructura_banco',200);
 			$table->integer('mo_id')->unsigned();
 			$table->timestamps();
 			$table->softDeletes();

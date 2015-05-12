@@ -14,6 +14,12 @@ class PorcentajeCondicionSustrato extends Model {
 
 	protected $dates = ['deleted_at'];
 
+	protected $fillable = [
+				'tipo_condicion_sustrato_id',
+				'porcentaje',
+				'generalidad_id'
+	];
+
 	public function tipoCondicionSustrato()
 	{
 		return $this->belongsTo('App\Models\TipoCondicionSustrato');

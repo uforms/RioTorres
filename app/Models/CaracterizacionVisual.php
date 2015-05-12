@@ -9,6 +9,14 @@ class CaracterizacionVisual extends Model {
 	protected $table = 'caracterizaciones_visuales';
 	public $timestamps = true;
 
+	protected $fillable = [
+			'presencia_rs_id',
+			'cont_puntual_id',
+			'color_agua_id',
+			'olor_agua_id',
+			'toma_agua_id'
+	];
+
 	public function presenciaRs()
 	{
 		return $this->belongsTo('App\Models\PresenciaRs');

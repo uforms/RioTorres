@@ -14,6 +14,18 @@ class Generalidad extends Model {
 
 	protected $dates = ['deleted_at'];
 
+	protected $fillable = [
+				'clima_id',
+				'curso_id',
+				'parametro_nivel_id',
+				'estructuras_banco_id',
+				'observacion_estructura_banco',
+				'mo_id',
+				'trabajo_ingenieril_id',
+				'toma_agua_id'
+
+	];
+
 	public function valoresCauces()
 	{
 		return $this->hasMany('App\Models\ValorCauce', 'generalidad_id');
