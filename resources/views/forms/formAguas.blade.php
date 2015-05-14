@@ -1,7 +1,7 @@
 {!!Form::open(['url' => '/tomas/crear/Aguas' , 'files'=>true]) !!}
 
 <div class="panel panel-primary">
-	<div class="panel-heading" data-toggle="collapse" href="#collapseInfoBasica" aria-expanded="false" aria-controls="collapseInfoBasica"><strong class="glyphicon glyphicon-resize-full"></strong>&nbsp Información Básica:</div>
+	<div class="panel-heading panel-heading-custom" data-toggle="collapse" href="#collapseInfoBasica" aria-expanded="false" aria-controls="collapseInfoBasica"><strong class="glyphicon glyphicon-resize-full"></strong>&nbsp Información Básica:</div>
 
 	<div class="panel-body collapse" id="collapseInfoBasica">
 
@@ -9,13 +9,13 @@
 		<div class="row">
 
 			<div class="col-lg-2">
-			<label for="hora_inicial"><a class="btn btn-success btn-xs" id="getHoraInicial"><i class='glyphicon glyphicon-repeat'></i></a>&nbsp &nbsp Hora Inicial </label>
+				<label for="hora_inicial"><a class="btn btn-success btn-xs" id="getHoraInicial"><i class='glyphicon glyphicon-repeat'></i></a>&nbsp &nbsp Hora Inicial </label>
 				<input type="text" name="hora_inicial" class="form-control" id="horaInicial" required value="{{old('hora_inicial')}}">
 				<br>
 			</div>
 
 			<div class="col-lg-2">
-			<label for="hora_final"><a class="btn btn-success btn-xs" id="getHoraFinal"><i class='glyphicon glyphicon-repeat'></i></a>&nbsp &nbsp Hora Final:</label>
+				<label for="hora_final"><a class="btn btn-success btn-xs" id="getHoraFinal"><i class='glyphicon glyphicon-repeat'></i></a>&nbsp &nbsp Hora Final:</label>
 				<input type="text" name="hora_final" class="form-control" id="horaFinal"  required value="{{ old('hora_final') }}">
 				<br>
 			</div>
@@ -31,17 +31,17 @@
 				<select name="sitio_id" class="form-control" required>
 					<option selected disabled  value=''></option>
 					@foreach($sitios as $sitio)
-						@if($sitio->id == old('sitio_id')) 
-							<option selected value="{{$sitio->id}}" >{{$sitio->name}}</option>
-						@else
-							<option value="{{$sitio->id}}" >{{$sitio->name}}</option>
-						@endif
+					@if($sitio->id == old('sitio_id')) 
+					<option selected value="{{$sitio->id}}" >{{$sitio->name}}</option>
+					@else
+					<option value="{{$sitio->id}}" >{{$sitio->name}}</option>
+					@endif
 					@endforeach
 				</select>
 				<br>
 			</div>
 		</div>
-			<!-- fin row -->
+		<!-- fin row -->
 
 		<hr>
 		<h4><a  class="btn btn-success btn-xs" onclick="getLocation()"><i class="glyphicon glyphicon-repeat"></i></a>&nbsp &nbsp  Geolocalización </h4>
@@ -58,7 +58,7 @@
 			</div>		
 
 		</div>
-			<!-- Fin row -->
+		<!-- Fin row -->
 
 		<hr>
 		<h4>Condiciones climáticas:</h4>
@@ -86,11 +86,11 @@
 		</div>
 	</div>
 </div>
-	<!-- fin panel 1 -->
+<!-- fin panel 1 -->
 
 
 <div class="panel panel-primary">
-	<div class="panel-heading" data-toggle="collapse" href="#collapseGeneralidades" aria-expanded="false" aria-controls="collapseGeneralidades"><strong class="glyphicon glyphicon-resize-full"></strong>&nbsp Generalidades:</div>
+	<div class="panel-heading panel-heading-custom" data-toggle="collapse" href="#collapseGeneralidades" aria-expanded="false" aria-controls="collapseGeneralidades"><strong class="glyphicon glyphicon-resize-full"></strong>&nbsp Generalidades:</div>
 
 	<div class="panel-body collapse" id="collapseGeneralidades">
 		<div class="row">
@@ -100,11 +100,11 @@
 				<select name="clima_id" class="form-control" required>
 					<option selected disabled  value=''></option>
 					@foreach($climas as $clima)
-						@if($clima->id == old('clima_id')) 
-							<option selected="" value="{{$clima->id}}" >{{$clima->nombre}}</option>
-						@else
-							<option value="{{$clima->id}}" >{{$clima->nombre}}</option>
-						@endif
+					@if($clima->id == old('clima_id')) 
+					<option selected="" value="{{$clima->id}}" >{{$clima->nombre}}</option>
+					@else
+					<option value="{{$clima->id}}" >{{$clima->nombre}}</option>
+					@endif
 					@endforeach
 				</select>
 				<br>
@@ -115,11 +115,11 @@
 				<select name="curso_id" class="form-control" required>
 					<option selected disabled  value=''></option>
 					@foreach($cursos as $curso)
-						@if($curso->id == old('curso_id')) 
-							<option selected="" value="{{$curso->id}}" >{{$curso->nombre}}</option>
-						@else
-							<option value="{{$curso->id}}" >{{$curso->nombre}}</option>
-						@endif
+					@if($curso->id == old('curso_id')) 
+					<option selected="" value="{{$curso->id}}" >{{$curso->nombre}}</option>
+					@else
+					<option value="{{$curso->id}}" >{{$curso->nombre}}</option>
+					@endif
 					@endforeach
 				</select>
 				<br>
@@ -130,11 +130,11 @@
 				<select name="parametro_nivel_id" class="form-control" required>
 					<option selected disabled  value=''></option>
 					@foreach($parametrosNivel as $parametroNivel)
-						@if($parametroNivel->id == old('parametro_nivel_id')) 
-							<option selected="" value="{{$parametroNivel->id}}" >{{$parametroNivel->nombre}}</option>
-						@else
-							<option value="{{$parametroNivel->id}}" >{{$parametroNivel->nombre}}</option>
-						@endif
+					@if($parametroNivel->id == old('parametro_nivel_id')) 
+					<option selected="" value="{{$parametroNivel->id}}" >{{$parametroNivel->nombre}}</option>
+					@else
+					<option value="{{$parametroNivel->id}}" >{{$parametroNivel->nombre}}</option>
+					@endif
 					@endforeach
 				</select>
 				<br>
@@ -146,11 +146,11 @@
 				<select name="mo_id" class="form-control" required>
 					<option selected disabled  value=''></option>
 					@foreach($mos as $mo)
-						@if($mo->id == old('mo_id')) 
-							<option selected="" value="{{$mo->id}}">{{$mo->nombre}}</option>
-						@else
-							<option value="{{$mo->id}}">{{$mo->nombre}}</option>
-						@endif
+					@if($mo->id == old('mo_id')) 
+					<option selected="" value="{{$mo->id}}">{{$mo->nombre}}</option>
+					@else
+					<option value="{{$mo->id}}">{{$mo->nombre}}</option>
+					@endif
 					@endforeach
 				</select>
 				<br>
@@ -161,11 +161,11 @@
 				<select name="trabajo_ingenieril_id" class="form-control" required>
 					<option selected disabled  value=''></option>
 					@foreach($trabajosIngenieriles as $trabajoIngenieril)
-						@if($trabajoIngenieril->id == old('trabajo_ingenieril_id')) 
-							<option selected="" value="{{$trabajoIngenieril->id}}">{{$trabajoIngenieril->nombre}}</option>
-						@else
-							<option value="{{$trabajoIngenieril->id}}">{{$trabajoIngenieril->nombre}}</option>
-						@endif
+					@if($trabajoIngenieril->id == old('trabajo_ingenieril_id')) 
+					<option selected="" value="{{$trabajoIngenieril->id}}">{{$trabajoIngenieril->nombre}}</option>
+					@else
+					<option value="{{$trabajoIngenieril->id}}">{{$trabajoIngenieril->nombre}}</option>
+					@endif
 					@endforeach
 				</select>
 				<br>
@@ -181,11 +181,11 @@
 				<select name="estructuras_banco_id" class="form-control" required>
 					<option selected disabled  value=''></option>
 					@foreach($estructurasBanco as $estructuraBanco)
-						@if($estructuraBanco->id == old('estructuras_banco_id')) 
-							<option selected="" value="{{$estructuraBanco->id}}">{{$estructuraBanco->nombre}}</option>
-						@else
-							<option value="{{$estructuraBanco->id}}">{{$estructuraBanco->nombre}}</option>
-						@endif
+					@if($estructuraBanco->id == old('estructuras_banco_id')) 
+					<option selected="" value="{{$estructuraBanco->id}}">{{$estructuraBanco->nombre}}</option>
+					@else
+					<option value="{{$estructuraBanco->id}}">{{$estructuraBanco->nombre}}</option>
+					@endif
 					@endforeach
 				</select>
 				<br>
@@ -244,13 +244,13 @@
 <!-- Fin panel 2 -->
 
 <div class="panel panel-primary">
-	<div class="panel-heading" data-toggle="collapse" href="#collapseVegetacion" aria-expanded="false" aria-controls="collapseVegetacion"><strong class="glyphicon glyphicon-resize-full"></strong>&nbsp Vegetación:</div>
+	<div class="panel-heading panel-heading-custom" data-toggle="collapse" href="#collapseVegetacion" aria-expanded="false" aria-controls="collapseVegetacion"><strong class="glyphicon glyphicon-resize-full"></strong>&nbsp Vegetación:</div>
 
 	<div class="panel-body collapse" id="collapseVegetacion">
 		<div class="row">
 			<div class="col-lg-3">
-				{!!Form::label('porcentajeVegetacionBanco','Vegetación en el banco (%): ')!!}
-				<input type="number" step="0.01" name="porcentajeVegetacionBanco" class="form-control" value="{{old('porcentajeVegetacionBanco')}}" required>
+				{!!Form::label('porcentaje_vegetacion_banco','Vegetación en el banco (%): ')!!}
+				<input type="number" step="0.01" name="porcentaje_vegetacion_banco" class="form-control" value="{{old('porcentaje_vegetacion_banco')}}" required>
 				<br>
 			</div>
 		</div>
@@ -297,10 +297,10 @@
 <!-- Fin Panel 3 -->
 
 <div class="panel panel-primary">
-	<div class="panel-heading" data-toggle="collapse" href="#collapseCaracterizacionVisual" aria-expanded="false" aria-controls="collapseCaracterizacionVisual"><strong class="glyphicon glyphicon-resize-full"></strong>&nbsp Caracterización Visual:</div>
+	<div class="panel-heading panel-heading-custom" data-toggle="collapse" href="#collapseCaracterizacionVisual" aria-expanded="false" aria-controls="collapseCaracterizacionVisual"><strong class="glyphicon glyphicon-resize-full"></strong>&nbsp Caracterización Visual:</div>
 
 	<div class="panel-body collapse" id="collapseCaracterizacionVisual">
-	
+		
 		<div class="row">
 			
 			<div class="col-lg-2">
@@ -308,11 +308,11 @@
 				<select name="presencia_rs_id" class="form-control" required>
 					<option selected disabled  value=''></option>
 					@foreach($presenciasRs as $presenciaRs)
-						@if($presenciaRs->id == old('presencia_rs_id')) 
-							<option selected="" value="{{$presenciaRs->id}}" >{{$presenciaRs->nombre}}</option>
-						@else
-							<option value="{{$presenciaRs->id}}" >{{$presenciaRs->nombre}}</option>
-						@endif
+					@if($presenciaRs->id == old('presencia_rs_id')) 
+					<option selected="" value="{{$presenciaRs->id}}" >{{$presenciaRs->nombre}}</option>
+					@else
+					<option value="{{$presenciaRs->id}}" >{{$presenciaRs->nombre}}</option>
+					@endif
 					@endforeach
 				</select>
 				<br>
@@ -323,11 +323,11 @@
 				<select name="cont_puntual_id" class="form-control" required>
 					<option selected disabled  value=''></option>
 					@foreach($contPuntuales as $contPuntual)
-						@if($contPuntual->id == old('cont_puntual_id')) 
-							<option selected="" value="{{$contPuntual->id}}" >{{$contPuntual->nombre}}</option>
-						@else
-							<option value="{{$contPuntual->id}}" >{{$contPuntual->nombre}}</option>
-						@endif
+					@if($contPuntual->id == old('cont_puntual_id')) 
+					<option selected="" value="{{$contPuntual->id}}" >{{$contPuntual->nombre}}</option>
+					@else
+					<option value="{{$contPuntual->id}}" >{{$contPuntual->nombre}}</option>
+					@endif
 					@endforeach
 				</select>
 				<br>
@@ -338,11 +338,11 @@
 				<select name="color_agua_id" class="form-control" required>
 					<option selected disabled  value=''></option>
 					@foreach($coloresAgua as $colorAgua)
-						@if($colorAgua->id == old('color_agua_id')) 
-							<option selected="" value="{{$colorAgua->id}}" >{{$colorAgua->nombre}}</option>
-						@else
-							<option value="{{$colorAgua->id}}" >{{$colorAgua->nombre}}</option>
-						@endif
+					@if($colorAgua->id == old('color_agua_id')) 
+					<option selected="" value="{{$colorAgua->id}}" >{{$colorAgua->nombre}}</option>
+					@else
+					<option value="{{$colorAgua->id}}" >{{$colorAgua->nombre}}</option>
+					@endif
 					@endforeach
 				</select>
 				<br>
@@ -353,11 +353,11 @@
 				<select name="olor_agua_id" class="form-control" required>
 					<option selected disabled  value=''></option>
 					@foreach($oloresAgua as $olorAgua)
-						@if($olorAgua->id == old('olor_agua_id')) 
-							<option selected="" value="{{$olorAgua->id}}" >{{$olorAgua->nombre}}</option>
-						@else
-							<option value="{{$olorAgua->id}}" >{{$olorAgua->nombre}}</option>
-						@endif
+					@if($olorAgua->id == old('olor_agua_id')) 
+					<option selected="" value="{{$olorAgua->id}}" >{{$olorAgua->nombre}}</option>
+					@else
+					<option value="{{$olorAgua->id}}" >{{$olorAgua->nombre}}</option>
+					@endif
 					@endforeach
 				</select>
 				<br>
@@ -372,7 +372,7 @@
 
 
 <div class="panel panel-primary">
-	<div class="panel-heading" data-toggle="collapse" href="#collapseDensiometro" aria-expanded="false" aria-controls="collapseDensiometro"><strong class="glyphicon glyphicon-resize-full"></strong>&nbsp Densiómetro:</div>
+	<div class="panel-heading panel-heading-custom" data-toggle="collapse" href="#collapseDensiometro" aria-expanded="false" aria-controls="collapseDensiometro"><strong class="glyphicon glyphicon-resize-full"></strong>&nbsp Densiómetro:</div>
 
 	<div class="panel-body collapse" id="collapseDensiometro">
 
@@ -403,12 +403,12 @@
 		</div>
 
 	</div>
-		<!-- Fin body -->
+	<!-- Fin body -->
 </div>
-	<!-- fin panel 4 -->
+<!-- fin panel 4 -->
 
 <div class="panel panel-primary">
-	<div class="panel-heading" data-toggle="collapse" href="#collapseFisicoQuimico" aria-expanded="false" aria-controls="collapseFisicoQuimico"><strong class="glyphicon glyphicon-resize-full"></strong>&nbsp Físico - Químicos:</div>
+	<div class="panel-heading panel-heading-custom" data-toggle="collapse" href="#collapseFisicoQuimico" aria-expanded="false" aria-controls="collapseFisicoQuimico"><strong class="glyphicon glyphicon-resize-full"></strong>&nbsp Físico - Químicos:</div>
 
 	<div class="panel-body collapse" id="collapseFisicoQuimico">
 
@@ -418,58 +418,58 @@
 		<div class="row">
 			<div class="col-lg-2">
 				<label for="oxigeno_miligramos_litro{{$i}}">O2 (mg/L):</label>
-				<input class="form-control" name="oxigeno_miligramos_litro{{$i}}" value="{{old('oxigeno_miligramos_litro'.$i)}}" />
+				<input type="number" step="0.01"  class="form-control" name="oxigeno_miligramos_litro{{$i}}" value="{{old('oxigeno_miligramos_litro'.$i)}}" />
 				<br>
 			</div>
 
 			<div class="col-lg-1">
 				<label for="oxigeno_porcentaje{{$i}}">O2 (%):</label>
-				<input class="form-control" name="oxigeno_porcentaje{{$i}}" value="{{old('oxigeno_porcentaje'.$i)}}"/>
+				<input type="number" step="0.01"  class="form-control" name="oxigeno_porcentaje{{$i}}" value="{{old('oxigeno_porcentaje'.$i)}}"/>
 				<br>
 			</div>
 
 			<div class="col-lg-1">
 				<label for="temperatura{{$i}}">T (°C):</label>
-				<input class="form-control" name="temperatura{{$i}}" value="{{old('temperatura'.$i)}}"/>
+				<input type="number" step="0.01"  class="form-control" name="temperatura{{$i}}" value="{{old('temperatura'.$i)}}"/>
 				<br>
 			</div>
 
 			<div class="col-lg-1">
 				<label for="ph{{$i}}">pH:</label>
-				<input class="form-control" name="ph{{$i}}" value="{{old('ph'.$i)}}"/>
+				<input type="number" step="0.01"  class="form-control" name="ph{{$i}}" value="{{old('ph'.$i)}}"/>
 				<br>
 			</div>
 
 			<div class="col-lg-2">
 				<label for="conductividad{{$i}}">Conduct. (uS/cm):</label>
-				<input class="form-control" name="conductividad{{$i}}" value="{{old('conductividad'.$i)}}"/>
+				<input type="number" step="0.01"  class="form-control" name="conductividad{{$i}}" value="{{old('conductividad'.$i)}}"/>
 				<br>
 			</div>
 
 			<div class="col-lg-2">
 				<label for="sst{{$i}}">SST (mg/L):</label>
-				<input class="form-control" name="sst{{$i}}" value="{{old('sst'.$i)}}"/>
+				<input type="number" step="0.01"  class="form-control" name="sst{{$i}}" value="{{old('sst'.$i)}}"/>
 				<br>
 			</div>
 
 			<div class="col-lg-2">
 				<label for="salinidad{{$i}}">Salinidad (ppm):</label>
-				<input class="form-control" name="salinidad{{$i}}" value="{{old('salinidad'.$i)}}"/>
+				<input type="number" step="0.01"  class="form-control" name="salinidad{{$i}}" value="{{old('salinidad'.$i)}}"/>
 				<br>
 			</div>
 
 		</div>
-			<!-- fin row -->
+		<!-- fin row -->
 		<hr>
 		@endfor
 
 	</div>
-		<!-- Fin body -->
+	<!-- Fin body -->
 </div>
-	<!-- fin panel 4 -->
+<!-- fin panel 4 -->
 
 <div class="panel panel-primary">
-	<div class="panel-heading" data-toggle="collapse" href="#collapseObservaciones" aria-expanded="false" aria-controls="collapseObservaciones"><strong class="glyphicon glyphicon-resize-full"></strong>&nbsp Observaciones:</div>
+	<div class="panel-heading panel-heading-custom" data-toggle="collapse" href="#collapseObservaciones" aria-expanded="false" aria-controls="collapseObservaciones"><strong class="glyphicon glyphicon-resize-full"></strong>&nbsp Observaciones:</div>
 
 	<div class="panel-body collapse" id="collapseObservaciones">
 
@@ -478,11 +478,11 @@
 				<label for="coliformes">¿Presencia de coliformes?</label>&nbsp &nbsp 
 				Sí 
 				@if(old('coliformes') == "1")
-					<input type="radio" name="coliformes" value="1"  checked/>
-					No <input type="radio" name="coliformes" value="0" />
+				<input type="radio" name="coliformes" value="Sí"  checked/>
+				No <input type="radio" name="coliformes" value="Sí" />
 				@else
-					<input type="radio" name="coliformes" value="1"  />
-					No <input type="radio" name="coliformes" value="0" checked/>
+				<input type="radio" name="coliformes" value="No"  />
+				No <input type="radio" name="coliformes" value="No" checked/>
 				@endif
 				
 				
@@ -495,9 +495,9 @@
 		</div>
 
 	</div>
-		<!-- fin body -->
+	<!-- fin body -->
 </div>
-	<!-- fin panel 5 -->
+<!-- fin panel 5 -->
 
 
 

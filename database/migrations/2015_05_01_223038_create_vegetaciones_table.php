@@ -12,6 +12,7 @@ class CreateVegetacionesTable extends Migration {
 			$table->timestamps();
 			$table->softDeletes();
 			$table->integer('toma_agua_id')->unsigned();
+			$table->float('porcentaje_vegetacion_banco');
 		});
 	}
 

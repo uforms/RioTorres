@@ -34,10 +34,11 @@
 
 			.quote {
 				font-size: 24px;
+				color: #000;
 			}
 			.title a{
 				text-decoration: none;	
-				color: #B7A6A6;		
+				color: #625757;		
 			}
 		</style>
 	</head>

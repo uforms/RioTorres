@@ -11,7 +11,7 @@ class EstructuraBanco extends Model {
 
 	public function generalidades()
 	{
-		return $this->hasMany('App\Models\Generalidad', 'estructura_banco_id');
+		return $this->hasMany('App\Models\Generalidad', 'estructuras_banco_id');
 	}
 
 }

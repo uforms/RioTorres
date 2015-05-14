@@ -38,7 +38,7 @@ class TomaAgua extends Model {
 
 	public function vegetaciones()
 	{
-		return $this->hasMany('App\Models\Vegetacion', 'toma_agua_id');
+		return $this->hasOne('App\Models\Vegetacion', 'toma_agua_id');
 	}
 
 	public function user()
@@ -53,7 +53,7 @@ class TomaAgua extends Model {
 
 	public function medidasDensiometro()
 	{
-		return $this->hasMany('App\Models\MedidaDensiometro', 'toma_agua_id');
+		return $this->hasOne('App\Models\MedidaDensiometro', 'toma_agua_id');
 	}
 
 	public function fisicoQuimico()

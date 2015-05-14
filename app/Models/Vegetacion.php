@@ -15,7 +15,8 @@ class Vegetacion extends Model {
 	protected $dates = ['deleted_at'];
 
 	protected $fillable = [
-				'toma_agua_id'
+				'toma_agua_id',
+				'porcentaje_vegetacion_banco'
 	];
 
 	public function porcentajesExposicionCauce()

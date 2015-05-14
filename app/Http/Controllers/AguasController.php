@@ -37,6 +37,7 @@ use App\Models\TipoRibera;
 use App\Models\TipoAmbienteAsociado;
 use App\Models\TipoSustrato;
 use App\Models\TipoCondicionSustrato;
+use App\Models\ValorCauce;
 use App\Models\Vegetacion;
 
 class AguasController extends Controller {
@@ -119,6 +120,34 @@ class AguasController extends Controller {
 		$input = Request::all();
 
 		//validar datos
+		$validator = Validator::make($input, [
+
+				'hora_inicial'				=>	'required | string',
+				'hora_final'				=>	'required | string',
+				'fecha'						=>	'string',
+				'sitio_id'					=>	'required',
+				'lat'						=>	'required',
+				'lng'						=>	'required',
+				'temperatura'				=>	'numeric',
+				'viento'					=>	'numeric',
+				'humedad'					=>	'numeric',
+				'clima_id'					=>	'integer',
+				'curso_id'					=>	'integer',
+				'parametro_nivel_id'		=>	'integer',
+				'mo_id'						=>	'integer',
+				'trabajo_ingenieril_id'		=>	'integer',
+				'estructura_banco_id'		=>	'integer',
+				'observacion_estructura_banco'		=>	'string',
+    	]);
+
+    	if ($validator->fails())
+	    {
+	    	$errors = $validator->errors();
+	        return Redirect::back()
+	        						->with('errors',$errors)
+	        						->withInput();
+	    }
+
 
 		//Add variable to input
 		$input['user_id']				= Auth::user()->id;
@@ -129,6 +158,20 @@ class AguasController extends Controller {
 		$input['toma_agua_id']			= $tomaAgua->id;
 
 		$generalidad = Generalidad::create($input);
+
+		//Agrega los datos de los valores del cauce
+		$tiposCauces = TipoCauce::all();
+		foreach($tiposCauces as $tipoCauce){
+			if(isset($input['cauce'.$tipoCauce->id])){
+				$valorCauce = new ValorCauce();
+
+				$valorCauce->generalidad_id	=	$generalidad->id;
+				$valorCauce->tipo_cauce_id 	=	$tipoCauce->id;
+				$valorCauce->valor 			= 	$input['cauce'.$tipoCauce->id];
+
+				$valorCauce->save();
+			}
+		}
 
 		//Agregar los datos de composicion del sustrato
 		$tiposSustratos = TipoSustrato::all();
@@ -161,12 +204,6 @@ class AguasController extends Controller {
 
 		//Crea y guarda datos de Vegetacion
 		$vegetacion = Vegetacion::create($input);
-
-		//Guardar datos Vegetacion
-		$porcentajeVegetacionBanco = new PorcentajeVegetacionBanco();
-		$porcentajeVegetacionBanco->vegetacion_id = $vegetacion->id;
-		$porcentajeVegetacionBanco->porcentaje    = $input['porcentajeVegetacionBanco'];
-		$porcentajeVegetacionBanco->save();
 
 		//Guardar datos porcentajes de exposicion de cauce
 		$tiposExposicionCauce = TipoExposicionCauce::all();
@@ -234,7 +271,10 @@ class AguasController extends Controller {
 		//Guardar datos densiometros
 		$medidaDensiometro = MedidaDensiometro::create($input);
 
-		return var_dump($generalidad);
+		$successMessage = " La toma de aguas ha sido creada con éxito.";
+		return Redirect::to('/tomas/Aguas')
+										->with('type',$this->type)
+										->with('successMessage',$successMessage);
 	}
 
 	/**

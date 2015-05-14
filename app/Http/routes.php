@@ -28,6 +28,8 @@ Route::post('tomas/crear/Aves','AvesController@store');
 Route::post('tomas/crear/Aguas','AguasController@store');
 Route::post('tomas/crear/Suelos','SuelosController@store');
 
+Route::get('/gps','GpsController@index');
+
 //Ajax routes (API)
 Route::get('get/parcelas/{sitio_id}' , 'SuelosController@getParcelas');
 Route::get('get/parcela/{parcela_id}', 'SuelosController@getParcela');

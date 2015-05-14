@@ -11,13 +11,13 @@ class CreateTomasAguasTable extends Migration {
 			$table->increments('id');
 			$table->integer('sitio_id')->unsigned();
 			$table->integer('user_id')->unsigned();
-			$table->datetime('hora_inicial');
-			$table->datetime('hora_final');
+			$table->string('hora_inicial',10);
+			$table->string('hora_final',10);
 			$table->float('humedad');
 			$table->float('temperatura');
 			$table->float('viento');
 			$table->text('observaciones');
-			$table->tinyInteger('coliformes');
+			$table->string('coliformes',4);
 			$table->timestamps();
 			$table->softDeletes();
 		});

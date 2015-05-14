@@ -60,10 +60,12 @@ class AvesController extends Controller {
 		
 		//Validacion de los datos
 		$validator = Validator::make($input, [
-			'id'		=>	'integer',
-	        'especie' 	=> 	'string',
-	        'genero'	=> 	'string',
-	        'fecha'		=>	'date',
+			'id'		=>	'required | integer',
+	        'especie' 	=> 	'required | string',
+	        'genero'	=> 	'required | string',
+	        'fecha'		=>	'required | string',
+	        'epoca_id'		=>	'required',
+	        'sitio_id'	=>	'required',
 	        'red'		=>	'integer',
 	        'oj'		=>	'integer',
 	        'cao'		=>	'integer',

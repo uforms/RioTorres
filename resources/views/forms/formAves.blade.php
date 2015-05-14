@@ -1,9 +1,9 @@
 {!!Form::open(['url' => '/tomas/crear/Aves' , 'files'=>true]) !!}
 
 <div class="panel panel-primary">
-	<div class="panel-heading">Específicos del Ave:</div>
+	<div class="panel-heading panel-heading-custom" data-toggle="collapse" href="#collapseEspecificoAve" aria-expanded="false" aria-controls="collapseEspecificoAve"><strong class="glyphicon glyphicon-resize-full"></strong>&nbsp Específicos del Ave:</div>
 
-	<div class="panel-body">
+	<div class="panel-body collapse" id="collapseEspecificoAve">
 		<div class="row">
 			<div class="col-lg-4">
 				{!!Form::label('id','Id:')!!}
@@ -28,9 +28,9 @@
 <!-- Fin panel1 -->
 
 <div class="panel panel-primary">
-	<div class="panel-heading">Específicos de la toma:</div>
+	<div class="panel-heading panel-heading-custom" data-toggle="collapse" href="#collapseEspecificosToma" aria-expanded="false" aria-controls="collapseEspecificosToma"><strong class="glyphicon glyphicon-resize-full"></strong>&nbsp Específicos de la toma:</div>
 
-	<div class="panel-body">
+	<div class="panel-body collapse" id="collapseEspecificosToma">
 		<div class="row">
 			<div class="col-lg-4">
 				{!!Form::label('fecha','Fecha:')!!}
@@ -73,9 +73,9 @@
 <!-- Fin panel2 -->
 
 <div class="panel panel-primary">
-	<div class="panel-heading">Examen General:</div>
+	<div class="panel-heading panel-heading-custom" data-toggle="collapse" href="#collapseExamenGeneral" aria-expanded="false" aria-controls="collapseExamenGeneral"><strong class="glyphicon glyphicon-resize-full"></strong>&nbsp Examen General:</div>
 
-	<div class="panel-body">
+	<div class="panel-body collapse" id="collapseExamenGeneral">
 		<div class="row">
 			<div class="col-lg-1 col-lg-offset-2">
 				{!!Form::label('red','Red:')!!}
@@ -202,10 +202,10 @@
 </div>
 <!-- Fin panel3 -->
 
-<div class="panel panel-primary">
-	<div class="panel-heading">Medidas Biométricas:</div>
+<div class="panel panel-primary ">
+	<div class="panel-heading panel-heading-custom" data-toggle="collapse" href="#collapseMedidaBiometrica" aria-expanded="false" aria-controls="collapseMedidaBiometrica"><strong class="glyphicon glyphicon-resize-full"></strong>&nbsp Medidas Biométricas:</div>
 
-	<div class="panel-body">
+	<div class="panel-body collapse" id="collapseMedidaBiometrica">
 		<div class="row">
 			<div class="col-lg-1">
 				{!!Form::label('peso','Peso:')!!}
@@ -335,9 +335,9 @@
 <!-- Fin panel4 -->
 
 <div class="panel panel-primary">
-	<div class="panel-heading">Observaciones: </div>
+	<div class="panel-heading panel-heading-custom" data-toggle="collapse" href="#collapseObservaciones" aria-expanded="false" aria-controls="collapseObservaciones"><strong class="glyphicon glyphicon-resize-full"></strong>&nbsp Observaciones: </div>
 
-	<div class="panel-body">
+	<div class="panel-body collapse" id="collapseObservaciones">
 		<div class="row">
 			<div class="col-lg-12 ">
 				<textarea class="form-control" rows="5" name="observaciones"> {{old('observaciones')}} </textarea> 
@@ -348,9 +348,9 @@
 <!-- Fin panel5 -->
 
 <div class="panel panel-primary">
-	<div class="panel-heading">Imágen: </div>
+	<div class="panel-heading panel-heading-custom" data-toggle="collapse" href="#collapseImagen" aria-expanded="false" aria-controls="collapseImagen"><strong class="glyphicon glyphicon-resize-full"></strong>&nbsp Imágen: </div>
 
-	<div class="panel-body">
+	<div class="panel-body collapse" id="collapseImagen">
 		<div class="row">
 			<div class="col-lg-4 ">
 				<input type="file" accept="image/*" capture="camera" name="img">
