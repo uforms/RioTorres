@@ -7,7 +7,6 @@ body{
 .navbar-custom{
 	border-radius: 0;
 	box-shadow:         0px 5px 6px 0px rgba(50, 50, 50, 0.5);
-    background-color: white;
 }
 .h1-custom{
 	margin-top: 0;
@@ -42,13 +41,15 @@ body{
     z-index: 10;
 }
 
-.navbar  li{
+.navbar-custom  li{
     border-color: #ccc;
 }
 
-.navbar  li:hover{
+/*
+.navbar-custom  li:hover{
     background-color: #E8E7E7;
 }
+*/
 
 .panel-heading-custom{
     cursor: pointer;
@@ -56,4 +57,25 @@ body{
 .panel-heading-custom:hover{
     background-color:#0F4C81;
     border-color: #0F4C81;
+}
+
+.carousel {
+    width: 160px;
+    height:160px;
+}
+.carousel-inner {
+    width: 160px;
+    height:160px;
+}
+
+.carousel-inner > .item > img{
+    width: 160px;
+    height:160px;
+}
+
+
+/* Panel de generacion de reportes*/
+
+.li-report-custom{
+    width:33%;
 }

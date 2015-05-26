@@ -80,8 +80,8 @@ class AvesController extends Controller {
 	        'edad'		=>	'alpha',
 	        'sexo'		=>	'alpha',
 	        'anillo'	=>	'string',
-	        'muestra_endoparasito' 	=> 'integer',
-	        'muestra_ectoparasito' 	=> 'integer',
+	        'muestra_endoparasito' 	=> 'string',
+	        'muestra_ectoparasito' 	=> 'string',
 	        'observaciones' 		=>	'string',
 
 
@@ -117,7 +117,7 @@ class AvesController extends Controller {
 		if($image != null)
 		{
 			$imageInfo 		= new ImagenAve();
-			$cantidadImgs 	= count($tomaAve->imagenesAves()); 
+			$cantidadImgs 	= count($ave->imagenesAves()); 
 			if($input['imgNombre'] != null)
 			{
 				$imageInfo->nombre = $input['imgNombre'];
@@ -128,6 +128,7 @@ class AvesController extends Controller {
 				$imageInfo->url 	= "toma".$tomaAve->id."_".$imageInfo->nombre;
 			}
 
+			$imageInfo->ave_id 		= $ave->id;
 			$imageInfo->toma_ave_id = $tomaAve->id;
 			$imageInfo->save();
 

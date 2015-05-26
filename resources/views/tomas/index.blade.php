@@ -1,7 +1,6 @@
 @extends('app')
 
 @section('content')
-<!-- Page Heading/Breadcrumbs -->
 <div class="row custom-header">
 	<div class="container">
 		<div class="col-lg-8">

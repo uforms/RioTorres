@@ -1,29 +1,29 @@
 @extends('app')
 
 @section('content')
+<div class="row custom-header">
+	<div class="container">
+		<div class="col-lg-8">
+			<h2 class="h1-custom">Seleccione Actividad:
+			</h2>
+		</div>
+	</div>
+</div>
+
 <div class="container">
 	<div class="row">
-		<div class="col-md-10 col-md-offset-1">
-			<div class="panel panel-primary">
-				<div class="panel-heading">Seleccione Actividad:</div>
+		<br><br>
+		<div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-1">
+			<a href="/tomas/Aguas" class=" img-rounded"><i class="glyphicon glyphicon-tint fa-5x"></i></a>
+		</div>
 
-				<div class="panel-body">
-					<div class="row">
-						<div class="col-lg-4">
-							<a href="/tomas/Aguas" class="btn btn-default btn-block">Aguas</a>
-							<br>
-						</div>
-						<div class="col-lg-4">
-							<a href="/tomas/Aves" class="btn btn-default btn-block">Aves</a>
-							<br>
-						</div>
-						<div class="col-lg-4">
-							<a href="/tomas/Suelos" class="btn btn-default btn-block">Suelos</a>
-							<br>
-						</div>
-					</div>
-				</div>
-			</div>
+		<div class="col-lg-2 col-md-2 col-sm-2 col-xs-3">
+			
+			<a href="/tomas/Aves" class=""> <i class="fa fa-twitter fa-5x"></i> </a>
+		</div>
+
+		<div class="col-lg-2 col-md-2 col-sm-2 col-xs-3">
+			<a href="/tomas/Suelos" class=""><i class="fa fa-globe fa-5x"></i> </a>
 		</div>
 	</div>
 </div>

@@ -20,4 +20,8 @@ class Ave extends Model {
 		return $this->hasMany('App\Models\TomaAve', 'ave_id');
 	}
 
+	public function imagenesAves(){
+		return $this->hasMany('App\Models\ImagenAve', 'ave_id');
+	}
+
 }

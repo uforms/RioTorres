@@ -12,7 +12,8 @@ class CreateImagenesAvesTable extends Migration {
 			$table->timestamps();
 			$table->softDeletes();
 			$table->string('nombre', 50);
-			$table->string('url', 50);
+			$table->text('url');
+			$table->integer('ave_id')->unsigned();
 			$table->integer('toma_ave_id')->unsigned();
 		});
 	}

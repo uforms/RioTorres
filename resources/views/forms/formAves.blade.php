@@ -295,16 +295,16 @@
 				{!!Form::label('muestra_endoparasito','Muestra Endoparásito:')!!}
 				<select name="muestra_endoparasito" class="form-control" required>
 					<option selected disabled  value=''></option>
-					@if(old('muestra_endoparasito') == "0")
-						<option selected value="0" >No</option>
+					@if(old('muestra_endoparasito') == "No")
+						<option selected value="No" >No</option>
 					@else
-						<option value="0" >No</option>
+						<option value="No" >No</option>
 					@endif
 
-					@if(old('muestra_endoparasito') == "1")
-						<option selected value="1" >Sí</option>
+					@if(old('muestra_endoparasito') == "Si")
+						<option selected value="Si" >Sí</option>
 					@else
-						<option value="1" >Sí</option>
+						<option value="Si" >Sí</option>
 					@endif
 				</select>
 				<br>
@@ -314,16 +314,16 @@
 				{!!Form::label('muestra_ectoparasito','Muestra Ectoparásito:')!!}
 				<select name="muestra_ectoparasito" class="form-control" required>
 					<option selected disabled  value=''></option>
-					@if(old('muestra_ectoparasito') == "0")
-						<option selected value="0" >No</option>
+					@if(old('muestra_ectoparasito') == "No")
+						<option selected value="No" >No</option>
 					@else
-						<option value="0" >No</option>
+						<option value="No" >No</option>
 					@endif
 
-					@if(old('muestra_ectoparasito') == "1")
-						<option selected value="1" >Sí</option>
+					@if(old('muestra_ectoparasito') == "Si")
+						<option selected value="Si" >Sí</option>
 					@else
-						<option value="1" >Sí</option>
+						<option value="Si" >Sí</option>
 					@endif
 				</select>
 				<br>

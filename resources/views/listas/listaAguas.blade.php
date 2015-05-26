@@ -73,10 +73,18 @@
 			</div>
 		</div>
 			<!-- fin row -->
+
+
 		<br>
 		<div class="row">
 			<div class="col-lg-4">
-				<strong>Estructura del Banco: </strong> <i style="color:red">Error Reparar</i>
+			<!-- To Fix   - La relacion no está funcionando bien, para desplegar el contenido hago una comparacion burda -->
+				<strong>Estructura del Banco: </strong>
+				@foreach($estructurasBanco as $estructuraBanco)
+					@if($estructuraBanco->id == $tomaAgua->generalidad->estructuras_banco_id)
+						{{$estructuraBanco->nombre}}
+					@endif
+				@endforeach
 				<br>
 			</div>
 
@@ -194,7 +202,7 @@
 			</div>
 
 			<div class="col-lg-3">
-				<strong>Cont. Puntual: </strong> {{$tomaAgua->caracterizacionVisual->contPuntual->nombre}}				
+				<strong>Contaminación Puntual: </strong> {{$tomaAgua->caracterizacionVisual->contPuntual->nombre}}				
 				<br>
 			</div>
 

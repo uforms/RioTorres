@@ -57,8 +57,9 @@ class AguasController extends Controller {
 	public function index()
 	{
 		$type = 'Aguas';
+		$estructurasBanco = EstructuraBanco::all();
 		$tomasAguas = TomaAgua::orderBy('created_at', 'desc')->paginate(5);
-		return view('tomas.index',compact('type','tomasAguas'));
+		return view('tomas.index',compact('type','tomasAguas' , 'estructurasBanco'));
 	}
 
 	/**

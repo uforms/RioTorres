@@ -15,8 +15,11 @@ class ImagenAve extends Model {
 	protected $dates = ['deleted_at'];
 	protected $fillable = array('nombre', 'url', 'toma_ave_id');
 
-	public function tomaAgua()
-	{
+	public function ave(){
+		return $this->belongsTo('App\Models\Ave');
+	}
+
+	public function tomaAve(){
 		return $this->belongsTo('App\Models\TomaAve');
 	}
 

@@ -55,8 +55,7 @@ class TomaAve extends Model {
 		return $this->belongsTo('App\Models\Epoca');
 	}
 
-	public function imagenesAves()
-	{
+	public function imagenesAves(){
 		return $this->hasMany('App\Models\ImagenAve', 'toma_ave_id');
 	}
 

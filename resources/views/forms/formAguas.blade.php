@@ -319,7 +319,7 @@
 			</div>
 
 			<div class="col-lg-2">
-				{!!Form::label('cont_puntual_id','Cont. Puntual:')!!}
+				{!!Form::label('cont_puntual_id','Contaminación Puntual:')!!}
 				<select name="cont_puntual_id" class="form-control" required>
 					<option selected disabled  value=''></option>
 					@foreach($contPuntuales as $contPuntual)
@@ -477,11 +477,11 @@
 			<div class="col-lg-4">
 				<label for="coliformes">¿Presencia de coliformes?</label>&nbsp &nbsp 
 				Sí 
-				@if(old('coliformes') == "1")
-				<input type="radio" name="coliformes" value="Sí"  checked/>
-				No <input type="radio" name="coliformes" value="Sí" />
+				@if(old('coliformes') == "Si")
+				<input type="radio" name="coliformes" value="Si"  checked/>
+				No <input type="radio" name="coliformes" value="No" />
 				@else
-				<input type="radio" name="coliformes" value="No"  />
+				<input type="radio" name="coliformes" value="Si"  />
 				No <input type="radio" name="coliformes" value="No" checked/>
 				@endif
 				
