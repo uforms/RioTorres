@@ -30,7 +30,7 @@ Route::post('tomas/crear/Suelos','SuelosController@store');
 
 Route::get('/gps','GpsController@index');
 
-
+Route::get('/reporte','ReportController@generate');
 
 
 Route::controllers([

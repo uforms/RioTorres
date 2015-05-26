@@ -5,6 +5,11 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
+use Auth;
+use Excel;
+
+use App\Models\TomaAgua;
+
 class ReportController extends Controller {
 
 	/**
@@ -18,7 +23,31 @@ class ReportController extends Controller {
 	}
 	
 	public function generate(){
-		return "generando";
+		Excel::create('Prueba de excel2', function ($excel){
+			
+			// Set the title
+		    $excel->setTitle('Reporte de ...');
+
+		    // Chain the setters
+		    $excel->setCreator(Auth::user()->name)
+		          ->setCompany('Proyecto Río Torres');
+
+		    // Call them separately
+		    $excel->setDescription('Reporte de toma de ...');
+
+		    $excel->sheet('Reporte de Tomas', function($sheet){
+		    	$sheet->setPageMargin([
+		    		1.25 , 5.30 , 5.25 , 5.30
+		    	]);
+		    	$sheet->protect('password');
+
+		    	$sheet->fromArray(TomaAgua::all());
+		    });
+		    
+
+        //})->store('xlsx' , storage_path('reportesGenerados') , true)->export('xlsx');
+		})->export('xlsx');
+		
 	}
 
 }

@@ -66,19 +66,19 @@
 
 
 			<div class="col-lg-2">
-				{!!Form::label('temperatura','Temperatura:')!!}
+				{!!Form::label('temperatura','Temperatura (°C):')!!}
 				<input type="number" step="0.01" name="temperatura" class="form-control" required value="{{old('temperatura')}}" >
 				<br>
 			</div>
 
 			<div class="col-lg-2">
-				{!!Form::label('viento','Viento:')!!}
+				{!!Form::label('viento','Viento (m/s):')!!}
 				<input type="number" step="0.01" name="viento" class="form-control" required value="{{old('viento')}}" >
 				<br>
 			</div>
 
 			<div class="col-lg-2">
-				{!!Form::label('humedad','Humedad:')!!}
+				{!!Form::label('humedad','Humedad (%):')!!}
 				<input type="number" step="0.01" name="humedad" class="form-control" required value="{{old('humedad')}}" >
 				<br>
 			</div>
