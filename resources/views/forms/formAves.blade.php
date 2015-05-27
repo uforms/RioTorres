@@ -5,21 +5,34 @@
 
 	<div class="panel-body collapse" id="collapseEspecificoAve">
 		<div class="row">
-			<div class="col-lg-4">
-				{!!Form::label('id','Id:')!!}
-				<input type="number" name="id" class="form-control" value="{{ old('id') }}" required>
+			<div class="col-lg-2">
+				{!!Form::label('migratoria','¿Ave migratoria?:')!!}<br> 
+				Sí 
+				@if(old('migratoria') == "Si")
+				<input type="radio" id="btnMigraSi" name="migratoria" value="Si"  checked/>
+				No <input type="radio" id="btnMigraNo" name="migratoria" value="No" />
+				@else
+				<input type="radio" id="btnMigraSi" name="migratoria" value="Si"  />
+				No <input type="radio" id="btnMigraNo" name="migratoria" value="No" checked/>
+				@endif
+				<br> <br>
+			</div>
+
+			<div class="col-lg-2">
+				{!!Form::label('numero_anillo','Número de anillo:')!!}
+				<input id="numero_anillo" type="number" class="form-control" name="numero_anillo" value="{{old('numero_anillo')}}" min="0">
 				<br>
 			</div>
 
 			<div class="col-lg-4">
 				{!!Form::label('especie','Especie:')!!}
-				<input type="text" name="especie" class="form-control" value="{{ old('especie') }}"  required>
+				<input id="especie" type="text" name="especie" class="form-control" value="{{ old('especie') }}"  required>
 				<br>
 			</div>
 
 			<div class="col-lg-4">
 				{!!Form::label('genero','Género:')!!}
-				<input type="text" name="genero" class="form-control" value="{{ old('genero') }}" required>
+				<input id="genero" type="text" name="genero" class="form-control" value="{{ old('genero') }}" required>
 				<br>
 			</div>
 		</div>
@@ -286,12 +299,6 @@
 			</div>
 
 			<div class="col-lg-2">
-				{!!Form::label('anillo','Anillo:')!!}
-				<input type="text" class="form-control" name="anillo" required value="{{old('anillo')}}">
-				<br>
-			</div>
-
-			<div class="col-lg-2">
 				{!!Form::label('muestra_endoparasito','Muestra Endoparásito:')!!}
 				<select name="muestra_endoparasito" class="form-control" required>
 					<option selected disabled  value=''></option>
@@ -380,3 +387,40 @@
 
 
 <br><br><br><br><br>
+<script>
+$('#numero_anillo').blur(function () {
+	var numeroAnillo = $('#numero_anillo').val();
+    $.ajax({
+		type:'GET',
+		url: '/remuestreo/'+ numeroAnillo,
+		success: function(data){
+			console.log(data[0]);
+			if(data[0]!=null)
+			{
+				$('#especie').val(data[0].especie);
+				$("#especie").prop('disabled', true);
+				$('#genero').val(data[0].genero);
+				$("#genero").prop('disabled', true);
+			}else{
+				$('#especie').val("");
+				$("#especie").prop('disabled', false);
+				$('#genero').val("");
+				$("#genero").prop('disabled', false);
+			}
+		}
+	});
+});
+</script>
+
+<script>
+	$('#btnMigraSi').click(function(){
+		$('#numero_anillo').val("");
+		$("#numero_anillo").prop('disabled', true);
+		$("#especie").prop('disabled', false);
+		$("#genero").prop('disabled', false);
+	});
+	$('#btnMigraNo').click(function(){
+		$('#numero_anillo').val("");
+		$("#numero_anillo").prop('disabled', false);
+	});
+</script>

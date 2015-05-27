@@ -60,31 +60,28 @@ class AvesController extends Controller {
 		
 		//Validacion de los datos
 		$validator = Validator::make($input, [
-			'id'		=>	'required | integer',
-	        'especie' 	=> 	'required | string',
-	        'genero'	=> 	'required | string',
-	        'fecha'		=>	'required | string',
-	        'epoca_id'		=>	'required',
-	        'sitio_id'	=>	'required',
-	        'red'		=>	'integer',
-	        'oj'		=>	'integer',
-	        'cao'		=>	'integer',
-	        'q'			=>	'integer',
-	        'ab'		=>	'integer',
-	        'cl'		=>	'integer',
-	        'pa'		=>	'integer',
-	        'al'		=>	'integer',
-	        'peso'		=>	'numeric',
-	        'ala'		=>	'numeric',
-	        'plumaje'	=>	'numeric',
-	        'edad'		=>	'alpha',
-	        'sexo'		=>	'alpha',
-	        'anillo'	=>	'string',
+	        'especie' 				=> 	'required | string',
+	        'genero'				=> 	'required | string',
+	        'fecha'					=>	'required | string',
+	        'epoca_id'				=>	'required',
+	        'sitio_id'				=>	'required',
+	        'red'					=>	'integer',
+	        'oj'					=>	'integer',
+	        'cao'					=>	'integer',
+	        'q'						=>	'integer',
+	        'ab'					=>	'integer',
+	        'cl'					=>	'integer',
+	        'pa'					=>	'integer',
+	        'al'					=>	'integer',
+	        'peso'					=>	'numeric',
+	        'ala'					=>	'numeric',
+	        'plumaje'				=>	'numeric',
+	        'edad'					=>	'alpha',
+	        'sexo'					=>	'alpha',
+	        'numero_anillo'			=>	'integer',
 	        'muestra_endoparasito' 	=> 'string',
 	        'muestra_ectoparasito' 	=> 'string',
 	        'observaciones' 		=>	'string',
-
-
     	]);
 		
     	if ($validator->fails())
@@ -95,8 +92,9 @@ class AvesController extends Controller {
 	        						->withInput();
 	    }
 
-		if(Ave::find(Request::get('id'))){
-			$ave = Ave::find(Request::get('id'));
+	    // Identifica si es una re-muestreo para NO duplicar el Ave
+		if(Ave::find(Request::get('numero_anillo'))){
+			$ave = Ave::find(Request::get('numero_anillo'));
 		}else{
 			$ave = Ave::create($input);
 		}
@@ -105,7 +103,7 @@ class AvesController extends Controller {
 		$examenGeneral 		= ExamenGeneral::create($input); 
 
 		//Add new variables to $input array
-		$input['ave_id'] 				= Request::get('id');
+		$input['ave_id'] 				= $ave->id;
 		$input['medida_biometrica_id']	= $medidaBiometrica->id;
 		$input['examen_general_id']		= $examenGeneral->id;
 		$input['user_id']				= Auth::user()->id;
@@ -144,6 +142,16 @@ class AvesController extends Controller {
 										->with('successMessage',$successMessage);
 
 		
+
+	}
+
+	public function Remuestra($numeroAnillo){
+		if(Ave::where('numero_anillo' , '=' , $numeroAnillo)->get()){
+			$ave = Ave::where('numero_anillo' , '=' , $numeroAnillo)->get();
+			return ($ave);
+		}else{
+			return "";
+		}
 
 	}
 

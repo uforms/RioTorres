@@ -13,7 +13,7 @@ class MedidaBiometrica extends Model {
 	use SoftDeletes;
 
 	protected $dates = ['deleted_at'];
-	protected $fillable = array('peso', 'ala', 'plumaje', 'edad', 'sexo', 'anillo', 'muestra_endoparasito', 'muestra_ectoparasito');
+	protected $fillable = array('peso', 'ala', 'plumaje', 'edad', 'sexo', 'muestra_endoparasito', 'muestra_ectoparasito');
 
 	public function tomaAve()
 	{

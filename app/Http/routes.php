@@ -32,6 +32,8 @@ Route::get('/gps','GpsController@index');
 
 Route::get('/reporte','ReportController@generate');
 
+Route::get('/remuestreo/{numeroAnillo}' , 'AvesController@Remuestra');
+
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
