@@ -39,7 +39,7 @@ class ReportController extends Controller {
 		    	$sheet->setPageMargin([
 		    		1.25 , 5.30 , 5.25 , 5.30
 		    	]);
-		    	$sheet->protect('password');
+		        $sheet->protect('password');  
 
 		    	$sheet->fromArray(TomaAgua::all());
 		    });
