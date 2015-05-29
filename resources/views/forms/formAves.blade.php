@@ -359,22 +359,24 @@
 
 	<div class="panel-body " id="collapseImagen">
 		<div class="row">
-			<input type="hidden" value="1" name="cantidadImagenes" />
+			<input type="hidden" value="1" name="cantidadImagenesPost" id="cantidadImagenesPost" />
 			<div class="col-lg-4 ">
-				<input type="file" accept="image/*" capture="camera" name="img" >
+				<input type="file" accept="image/*" capture="camera" name="img1" >
 			<br>
 			</div>
 
 			<div class="col-lg-8">
-				<input type="text" class="form-control" name="imgNombre" placeholder="Nombre de la imagen" />
+				<input type="text" class="form-control" name="imgNombre1" placeholder="Nombre de la imagen" />
 			<br>
 			</div>
-
 		</div>
 
+		<div id="appendImgs"></div>
 		
 		<div class="row">
-			<div class="col-lg-2"><a class="btn btn-success"><i class="glyphicon glyphicon-plus"></i></a></div>
+			<div class="col-lg-2">
+				<a class="btn btn-success" id="addImg"><i class="glyphicon glyphicon-plus"></i></a>
+			</div>
 		</div>
 	</div>
 </div>
@@ -406,14 +408,18 @@ $('#numero_anillo').blur(function () {
 			if(data[0]!=null)
 			{
 				$('#especie').val(data[0].especie);
-				$("#especie").prop('disabled', true);
 				$('#genero').val(data[0].genero);
+				/*
+				$("#especie").prop('disabled', true);
 				$("#genero").prop('disabled', true);
+				*/
 			}else{
 				$('#especie').val("");
-				$("#especie").prop('disabled', false);
 				$('#genero').val("");
+				/*
+				$("#especie").prop('disabled', false);
 				$("#genero").prop('disabled', false);
+				*/
 			}
 		}
 	});
@@ -430,5 +436,14 @@ $('#numero_anillo').blur(function () {
 	$('#btnMigraNo').click(function(){
 		$('#numero_anillo').val("");
 		$("#numero_anillo").prop('disabled', false);
+	});
+
+	//Agregar Imagen
+	$('#addImg').click(function(){
+		var canImg = $('#cantidadImagenesPost').val()*1+1;
+		$('#cantidadImagenesPost').val((canImg) );
+
+		$('#appendImgs').append('<div class="row"><div class="col-lg-4 "><input type="file" accept="image/*" capture="camera" name="img'+canImg+'" ><br></div><div class="col-lg-8"><input type="text" class="form-control" name="imgNombre'+canImg+'" placeholder="Nombre de la imagen" /><br></div></div>');
+
 	});
 </script>

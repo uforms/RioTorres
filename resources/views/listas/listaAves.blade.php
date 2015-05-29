@@ -146,6 +146,13 @@
 
 		</div>
 		<!-- fin row -->
+
+		<div class="row">
+			<div class="col-lg-12">
+				<strong>Observaciones: </strong><br>
+				{{$tomaAve->observaciones}}
+			</div>
+		</div>
 	</div>
 		<!-- fin panel body -->
 </div>

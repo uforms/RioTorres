@@ -111,27 +111,32 @@ class AvesController extends Controller {
 		$tomaAve = TomaAve::create($input);
 
 		//get and save image
-		$image 			= Request::file('img');
-		if($image != null)
-		{
-			$imageInfo 		= new ImagenAve();
-			$cantidadImgs 	= count($ave->imagenesAves()); 
-			if($input['imgNombre'] != null)
+		$cantidadImagenesPost = Request::get('cantidadImagenesPost');
+		for ($instanciaAve=1; $instanciaAve <=$cantidadImagenesPost ; $instanciaAve++) { 
+
+			$image 			= Request::file('img'.$instanciaAve);
+			if($image != null)
 			{
-				$imageInfo->nombre = $input['imgNombre'];
-				$imageInfo->url 		= $cantidadImgs."toma".$tomaAve->id."_".$imageInfo->nombre.".jpg"; 
-			}else
-			{
-				$imageInfo->nombre 	= $image->getClientOriginalName();
-				$imageInfo->url 	= "toma".$tomaAve->id."_".$imageInfo->nombre;
+				$imageInfo 		= new ImagenAve();
+				$cantidadImgs 	= count($ave->imagenesAves()); 
+				if($input['imgNombre'.$instanciaAve] != null)
+				{
+					$imageInfo->nombre = $input['imgNombre'.$instanciaAve];
+					$imageInfo->url 		= $cantidadImgs."toma".$tomaAve->id."_".$imageInfo->nombre.".jpg"; 
+				}else
+				{
+					$imageInfo->nombre 	= $image->getClientOriginalName();
+					$imageInfo->url 	= "toma".$tomaAve->id."_".$imageInfo->nombre;
+				}
+
+				$imageInfo->ave_id 		= $ave->id;
+				$imageInfo->toma_ave_id = $tomaAve->id;
+				$imageInfo->save();
+
+				$image->move('avesPics',$imageInfo->url);
 			}
-
-			$imageInfo->ave_id 		= $ave->id;
-			$imageInfo->toma_ave_id = $tomaAve->id;
-			$imageInfo->save();
-
-			$image->move('avesPics',$imageInfo->url);
-		}
+		}//end for
+		
 		
 
 		$tomasAves = TomaAve::paginate(5);
