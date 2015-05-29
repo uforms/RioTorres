@@ -357,16 +357,24 @@
 <div class="panel panel-primary">
 	<div class="panel-heading panel-heading-custom" data-toggle="collapse" href="#collapseImagen" aria-expanded="false" aria-controls="collapseImagen"><strong class="glyphicon glyphicon-resize-full"></strong>&nbsp Imágen: </div>
 
-	<div class="panel-body collapse" id="collapseImagen">
+	<div class="panel-body " id="collapseImagen">
 		<div class="row">
+			<input type="hidden" value="1" name="cantidadImagenes" />
 			<div class="col-lg-4 ">
-				<input type="file" accept="image/*" capture="camera" name="img">
+				<input type="file" accept="image/*" capture="camera" name="img" >
 			<br>
 			</div>
+
 			<div class="col-lg-8">
 				<input type="text" class="form-control" name="imgNombre" placeholder="Nombre de la imagen" />
 			<br>
 			</div>
+
+		</div>
+
+		
+		<div class="row">
+			<div class="col-lg-2"><a class="btn btn-success"><i class="glyphicon glyphicon-plus"></i></a></div>
 		</div>
 	</div>
 </div>

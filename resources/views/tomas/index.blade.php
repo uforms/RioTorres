@@ -3,18 +3,20 @@
 @section('content')
 <div class="row custom-header">
 	<div class="container">
-		<div class="col-lg-8">
+		<div class="col-lg-4">
 			<h1 class="h1-custom">Tomas de {{$type}} 
 				<small>lista</small> 
 			</h1>
 		</div>
-		<div class="col-lg-2">
-			<a href="/tomas/crear/{{$type}}" class="btn btn-default btn-block btn-custom">Realizar Toma</a>
+		<div class="col-lg-2 btn-tomas" >
+			<a href="/tomas/crear/{{$type}}" class="btn btn-primary btn-block btn-custom">Realizar Toma</a>
 			<br>
 		</div>
-		<div class="col-lg-2">
-		<a href="crear/{{$type}}" class="btn btn-default btn-block btn-custom">Ver Parámetros</a>
+		 <!-- 
+		<div class="col-lg-2 col-md-6 col-sm-6 col-xs-6  btn-tomas">
+		<a href="#" class="btn btn-primary btn-block btn-custom">Ver Parámetros</a>
 		</div>
+		 -->
 	</div>
 </div>
 
