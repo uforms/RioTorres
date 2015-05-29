@@ -67,19 +67,19 @@
 
 			<div class="col-lg-2">
 				{!!Form::label('temperatura','Temperatura (°C):')!!}
-				<input type="number" step="0.01" name="temperatura" class="form-control" required value="{{old('temperatura')}}" >
+				<input type="number" step="0.01"  name="temperatura" class="form-control" required value="{{old('temperatura')}}" >
 				<br>
 			</div>
 
 			<div class="col-lg-2">
 				{!!Form::label('viento','Viento (m/s):')!!}
-				<input type="number" step="0.01" name="viento" class="form-control" required value="{{old('viento')}}" >
+				<input type="number" step="0.01" min="0" name="viento" class="form-control" required value="{{old('viento')}}" >
 				<br>
 			</div>
 
 			<div class="col-lg-2">
 				{!!Form::label('humedad','Humedad (%):')!!}
-				<input type="number" step="0.01" name="humedad" class="form-control" required value="{{old('humedad')}}" >
+				<input type="number" step="0.01" min="0" name="humedad" class="form-control" required value="{{old('humedad')}}" >
 				<br>
 			</div>
 
@@ -206,7 +206,7 @@
 			@foreach($tiposCauces as $tipoCauce)
 			<div class="col-lg-2">
 				{!!Form::label("cauce".$tipoCauce->id,$tipoCauce->nombre)!!}
-				<input type="number" step="0.01" name="cauce{{$tipoCauce->id}}" class="form-control" value="{{ old('cauce'.$tipoCauce->id) }}" required>
+				<input type="number" step="0.01" min="0" name="cauce{{$tipoCauce->id}}" class="form-control" value="{{ old('cauce'.$tipoCauce->id) }}" required>
 				<br>
 			</div>
 			@endforeach
@@ -219,7 +219,7 @@
 			@foreach($tiposSustratos as $tipoSustrato)
 			<div class="col-lg-2">
 				{!!Form::label('composicionSustrato'.$tipoSustrato->id,$tipoSustrato->nombre)!!}
-				<input type="number" step="0.01" name="composicionSustrato{{$tipoSustrato->id}}" class="form-control" value="{{old('composicionSustrato'.$tipoSustrato->id)}}" required>
+				<input type="number" step="0.01" min="0" name="composicionSustrato{{$tipoSustrato->id}}" class="form-control" value="{{old('composicionSustrato'.$tipoSustrato->id)}}" required>
 				<br>
 			</div>
 			@endforeach
@@ -232,7 +232,7 @@
 			@foreach($tiposCondicionesSustratos as $tipoCondicionSustrato)
 			<div class="col-lg-2">
 				{!!Form::label('condicionSustrato'.$tipoCondicionSustrato->id,$tipoCondicionSustrato->nombre)!!}
-				<input type="number" step="0.01" name="condicionSustrato{{$tipoCondicionSustrato->id}}" class="form-control" value="{{old('condicionSustrato'.$tipoCondicionSustrato->id)}}" required>
+				<input type="number" step="0.01" min="0" name="condicionSustrato{{$tipoCondicionSustrato->id}}" class="form-control" value="{{old('condicionSustrato'.$tipoCondicionSustrato->id)}}" required>
 				<br>
 			</div>
 			@endforeach
@@ -250,7 +250,7 @@
 		<div class="row">
 			<div class="col-lg-3">
 				{!!Form::label('porcentaje_vegetacion_banco','Vegetación en el banco (%): ')!!}
-				<input type="number" step="0.01" name="porcentaje_vegetacion_banco" class="form-control" value="{{old('porcentaje_vegetacion_banco')}}" required>
+				<input type="number" step="0.01" min="0" name="porcentaje_vegetacion_banco" class="form-control" value="{{old('porcentaje_vegetacion_banco')}}" required>
 				<br>
 			</div>
 		</div>
@@ -261,7 +261,7 @@
 			@foreach($tiposExposicionCauce as $tipoExposicionCauce)
 			<div class="col-lg-2">
 				{!!Form::label('tipoExposicionCauce'.$tipoExposicionCauce->id,$tipoExposicionCauce->nombre)!!}
-				<input type="number" step="0.01" name="tipoExposicionCauce{{$tipoExposicionCauce->id}}" class="form-control" value="{{old('tipoExposicionCauce'.$tipoExposicionCauce->id)}}" required>
+				<input type="number" step="0.01" min="0" name="tipoExposicionCauce{{$tipoExposicionCauce->id}}" class="form-control" value="{{old('tipoExposicionCauce'.$tipoExposicionCauce->id)}}" required>
 				<br>
 			</div>
 			@endforeach
@@ -273,7 +273,7 @@
 			@foreach($tiposRiberas as $tipoRibera)
 			<div class="col-lg-2">
 				{!!Form::label('tipoRibera'.$tipoRibera->id,$tipoRibera->nombre)!!}
-				<input type="number" step="0.01" name="tipoRibera{{$tipoRibera->id}}" class="form-control" value="{{old('tipoRibera'.$tipoRibera->id)}}" required>
+				<input type="number" step="0.01" min="0" name="tipoRibera{{$tipoRibera->id}}" class="form-control" value="{{old('tipoRibera'.$tipoRibera->id)}}" required>
 				<br>
 			</div>
 			@endforeach
@@ -285,7 +285,7 @@
 			@foreach($tiposAmbientesAsociados as $tipoAmbienteAsociado)
 			<div class="col-lg-2">
 				{!!Form::label('tipoAmbienteAsociado'.$tipoAmbienteAsociado->id,$tipoAmbienteAsociado->nombre)!!}
-				<input type="number" step="0.01" name="tipoAmbienteAsociado{{$tipoAmbienteAsociado->id}}" class="form-control" value="{{old('tipoAmbienteAsociado'.$tipoAmbienteAsociado->id)}}" required>
+				<input type="number" step="0.01" min="0" name="tipoAmbienteAsociado{{$tipoAmbienteAsociado->id}}" class="form-control" value="{{old('tipoAmbienteAsociado'.$tipoAmbienteAsociado->id)}}" required>
 				<br>
 			</div>
 			@endforeach
@@ -418,43 +418,43 @@
 		<div class="row">
 			<div class="col-lg-2">
 				<label for="oxigeno_miligramos_litro{{$i}}">O2 (mg/L):</label>
-				<input type="number" step="0.01"  class="form-control" name="oxigeno_miligramos_litro{{$i}}" value="{{old('oxigeno_miligramos_litro'.$i)}}" />
+				<input type="number" step="0.01" min="0" class="form-control" name="oxigeno_miligramos_litro{{$i}}" value="{{old('oxigeno_miligramos_litro'.$i)}}" />
 				<br>
 			</div>
 
 			<div class="col-lg-1">
 				<label for="oxigeno_porcentaje{{$i}}">O2 (%):</label>
-				<input type="number" step="0.01"  class="form-control" name="oxigeno_porcentaje{{$i}}" value="{{old('oxigeno_porcentaje'.$i)}}"/>
+				<input type="number" step="0.01" min="0"  class="form-control" name="oxigeno_porcentaje{{$i}}" value="{{old('oxigeno_porcentaje'.$i)}}"/>
 				<br>
 			</div>
 
 			<div class="col-lg-1">
 				<label for="temperatura{{$i}}">T (°C):</label>
-				<input type="number" step="0.01"  class="form-control" name="temperatura{{$i}}" value="{{old('temperatura'.$i)}}"/>
+				<input type="number" step="0.01"   class="form-control" name="temperatura{{$i}}" value="{{old('temperatura'.$i)}}"/>
 				<br>
 			</div>
 
 			<div class="col-lg-1">
 				<label for="ph{{$i}}">pH:</label>
-				<input type="number" step="0.01"  class="form-control" name="ph{{$i}}" value="{{old('ph'.$i)}}"/>
+				<input type="number" step="0.01" min="0" class="form-control" name="ph{{$i}}" value="{{old('ph'.$i)}}"/>
 				<br>
 			</div>
 
 			<div class="col-lg-2">
 				<label for="conductividad{{$i}}">Conduct. (uS/cm):</label>
-				<input type="number" step="0.01"  class="form-control" name="conductividad{{$i}}" value="{{old('conductividad'.$i)}}"/>
+				<input type="number" step="0.01" min="0" class="form-control" name="conductividad{{$i}}" value="{{old('conductividad'.$i)}}"/>
 				<br>
 			</div>
 
 			<div class="col-lg-2">
 				<label for="sst{{$i}}">SST (mg/L):</label>
-				<input type="number" step="0.01"  class="form-control" name="sst{{$i}}" value="{{old('sst'.$i)}}"/>
+				<input type="number" step="0.01" min="0" class="form-control" name="sst{{$i}}" value="{{old('sst'.$i)}}"/>
 				<br>
 			</div>
 
 			<div class="col-lg-2">
 				<label for="salinidad{{$i}}">Salinidad (ppm):</label>
-				<input type="number" step="0.01"  class="form-control" name="salinidad{{$i}}" value="{{old('salinidad'.$i)}}"/>
+				<input type="number" step="0.01" min="0"  class="form-control" name="salinidad{{$i}}" value="{{old('salinidad'.$i)}}"/>
 				<br>
 			</div>
 

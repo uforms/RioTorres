@@ -9,8 +9,10 @@ class CreateAvesTable extends Migration {
 	{
 		Schema::create('aves', function(Blueprint $table) {
 			$table->increments('id');
+			$table->integer('numero_anillo');
 			$table->string('especie', 50);
 			$table->string('genero', 50);
+			$table->string('migratoria',2);
 			$table->timestamps();
 			$table->softDeletes();
 		});

@@ -28,12 +28,19 @@ body{
     color:#F7F7F7;
 }
 .btn-custom{
-    border-radius: 0;
-    box-shadow: none;
-    border: none;
     font-family: "Roboto", Helvetica, Arial, sans-serif;
-    color:#777777;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+    background-color: #5FB37B;
+    border-color:white;
+    border-width: 2px;
+}
+.btn-custom:hover{
+    background-color: white;
+    border-color:#60B07B;
+    color:#5FB37B;
+}
+.btn-tomas{
+    margin-top:25px;
+    margin-bottom: -25px;
 }
 .breadcrumb-custom{
     background-color: white;

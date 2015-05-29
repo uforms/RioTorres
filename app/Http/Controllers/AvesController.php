@@ -60,31 +60,28 @@ class AvesController extends Controller {
 		
 		//Validacion de los datos
 		$validator = Validator::make($input, [
-			'id'		=>	'required | integer',
-	        'especie' 	=> 	'required | string',
-	        'genero'	=> 	'required | string',
-	        'fecha'		=>	'required | string',
-	        'epoca_id'		=>	'required',
-	        'sitio_id'	=>	'required',
-	        'red'		=>	'integer',
-	        'oj'		=>	'integer',
-	        'cao'		=>	'integer',
-	        'q'			=>	'integer',
-	        'ab'		=>	'integer',
-	        'cl'		=>	'integer',
-	        'pa'		=>	'integer',
-	        'al'		=>	'integer',
-	        'peso'		=>	'numeric',
-	        'ala'		=>	'numeric',
-	        'plumaje'	=>	'numeric',
-	        'edad'		=>	'alpha',
-	        'sexo'		=>	'alpha',
-	        'anillo'	=>	'string',
+	        'especie' 				=> 	'required | string',
+	        'genero'				=> 	'required | string',
+	        'fecha'					=>	'required | string',
+	        'epoca_id'				=>	'required',
+	        'sitio_id'				=>	'required',
+	        'red'					=>	'integer',
+	        'oj'					=>	'integer',
+	        'cao'					=>	'integer',
+	        'q'						=>	'integer',
+	        'ab'					=>	'integer',
+	        'cl'					=>	'integer',
+	        'pa'					=>	'integer',
+	        'al'					=>	'integer',
+	        'peso'					=>	'numeric',
+	        'ala'					=>	'numeric',
+	        'plumaje'				=>	'numeric',
+	        'edad'					=>	'alpha',
+	        'sexo'					=>	'alpha',
+	        'numero_anillo'			=>	'integer',
 	        'muestra_endoparasito' 	=> 'string',
 	        'muestra_ectoparasito' 	=> 'string',
 	        'observaciones' 		=>	'string',
-
-
     	]);
 		
     	if ($validator->fails())
@@ -95,8 +92,9 @@ class AvesController extends Controller {
 	        						->withInput();
 	    }
 
-		if(Ave::find(Request::get('id'))){
-			$ave = Ave::find(Request::get('id'));
+	    // Identifica si es una re-muestreo para NO duplicar el Ave
+		if(Ave::find(Request::get('numero_anillo'))){
+			$ave = Ave::find(Request::get('numero_anillo'));
 		}else{
 			$ave = Ave::create($input);
 		}
@@ -105,7 +103,7 @@ class AvesController extends Controller {
 		$examenGeneral 		= ExamenGeneral::create($input); 
 
 		//Add new variables to $input array
-		$input['ave_id'] 				= Request::get('id');
+		$input['ave_id'] 				= $ave->id;
 		$input['medida_biometrica_id']	= $medidaBiometrica->id;
 		$input['examen_general_id']		= $examenGeneral->id;
 		$input['user_id']				= Auth::user()->id;
@@ -113,27 +111,32 @@ class AvesController extends Controller {
 		$tomaAve = TomaAve::create($input);
 
 		//get and save image
-		$image 			= Request::file('img');
-		if($image != null)
-		{
-			$imageInfo 		= new ImagenAve();
-			$cantidadImgs 	= count($ave->imagenesAves()); 
-			if($input['imgNombre'] != null)
+		$cantidadImagenesPost = Request::get('cantidadImagenesPost');
+		for ($instanciaAve=1; $instanciaAve <=$cantidadImagenesPost ; $instanciaAve++) { 
+
+			$image 			= Request::file('img'.$instanciaAve);
+			if($image != null)
 			{
-				$imageInfo->nombre = $input['imgNombre'];
-				$imageInfo->url 		= $cantidadImgs."toma".$tomaAve->id."_".$imageInfo->nombre.".jpg"; 
-			}else
-			{
-				$imageInfo->nombre 	= $image->getClientOriginalName();
-				$imageInfo->url 	= "toma".$tomaAve->id."_".$imageInfo->nombre;
+				$imageInfo 		= new ImagenAve();
+				$cantidadImgs 	= count($ave->imagenesAves()); 
+				if($input['imgNombre'.$instanciaAve] != null)
+				{
+					$imageInfo->nombre = $input['imgNombre'.$instanciaAve];
+					$imageInfo->url 		= $cantidadImgs."toma".$tomaAve->id."_".$imageInfo->nombre.".jpg"; 
+				}else
+				{
+					$imageInfo->nombre 	= $image->getClientOriginalName();
+					$imageInfo->url 	= "toma".$tomaAve->id."_".$imageInfo->nombre;
+				}
+
+				$imageInfo->ave_id 		= $ave->id;
+				$imageInfo->toma_ave_id = $tomaAve->id;
+				$imageInfo->save();
+
+				$image->move('avesPics',$imageInfo->url);
 			}
-
-			$imageInfo->ave_id 		= $ave->id;
-			$imageInfo->toma_ave_id = $tomaAve->id;
-			$imageInfo->save();
-
-			$image->move('avesPics',$imageInfo->url);
-		}
+		}//end for
+		
 		
 
 		$tomasAves = TomaAve::paginate(5);
@@ -144,6 +147,16 @@ class AvesController extends Controller {
 										->with('successMessage',$successMessage);
 
 		
+
+	}
+
+	public function Remuestra($numeroAnillo){
+		if(Ave::where('numero_anillo' , '=' , $numeroAnillo)->get()){
+			$ave = Ave::where('numero_anillo' , '=' , $numeroAnillo)->get();
+			return ($ave);
+		}else{
+			return "";
+		}
 
 	}
 

@@ -14,7 +14,6 @@ class CreateMedidasBiometricasTable extends Migration {
 			$table->integer('plumaje');
 			$table->string('edad', 2);
 			$table->string('sexo', 2);
-			$table->string('anillo', 255);
 			$table->string('muestra_endoparasito',4);
 			$table->string('muestra_ectoparasito',4);
 			$table->timestamps();

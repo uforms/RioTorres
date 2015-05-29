@@ -39,7 +39,9 @@
 		<div class="row">
 			<div class="col-lg-2" >
 
-					<!-- Inicio carousel -->
+			@if($tomaAve->imagenesAves->count() > 0)
+			
+				<!-- Inicio carousel -->
 				<div id="myCarousel{{$tomaAve->id}}" class="carousel slide" data-ride="carousel">
 				  <!-- Indicators 
 				  <ol class="carousel-indicators">
@@ -53,8 +55,9 @@
 				  <!-- Wrapper for slides -->
 				  <div class="carousel-inner" role="listbox">
 
+
 				  	<?php 
-				  		$imageCounter = 0;
+				  		$imageCounter = 0; //Para activar primera imagen
 				  	 ?>
 				  	@foreach($tomaAve->imagenesAves as $imagenAve)
 				  		@if($imageCounter == 0)
@@ -81,14 +84,23 @@
 				  </a>
 				</div>
 					<!-- fin carousel -->
-
+			@else
+				No hay imagenes 
+			@endif
 			</div>
+				<!-- Fin col carousel -->
 
 			<div class="col-lg-3">
 				<h4>Ave: </h4>
 				<strong>Id Ave: </strong> {{$tomaAve->ave->id}}
 				<br>
 				<strong>Especie: </strong> {{$tomaAve->ave->especie}}
+				<br>
+				@if($tomaAve->ave->migratoria == "Si")
+					<strong>Ave Migratoria</strong>
+				@else
+					<strong>Número de Anillo: </strong> {{$tomaAve->ave->numero_anillo}}
+				@endif
 				<br>
 				<strong>Género: </strong> {{$tomaAve->ave->genero}}
 				<br>
@@ -105,8 +117,6 @@
 				<strong>Edad: </strong> {{$tomaAve->medidaBiometrica->edad}}
 				<br>
 				<strong>Sexo: </strong> {{$tomaAve->medidaBiometrica->sexo}}
-				<br>
-				<strong>Anillo: </strong> {{$tomaAve->medidaBiometrica->anillo}}
 				<br>
 				<strong>Muestra Endoparásito: </strong> {{$tomaAve->medidaBiometrica->muestra_endoparasito}}
 				<br>
@@ -136,6 +146,13 @@
 
 		</div>
 		<!-- fin row -->
+
+		<div class="row">
+			<div class="col-lg-12">
+				<strong>Observaciones: </strong><br>
+				{{$tomaAve->observaciones}}
+			</div>
+		</div>
 	</div>
 		<!-- fin panel body -->
 </div>
