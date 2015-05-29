@@ -4,7 +4,7 @@
 <div class="row custom-header">
 	<div class="container">
 		<div class="col-lg-4">
-			<h1 class="h1-custom">Tomas de MODIFICADO  {{$type}} 
+			<h1 class="h1-custom">Tomas de {{$type}} 
 				<small>lista</small> 
 			</h1>
 		</div>

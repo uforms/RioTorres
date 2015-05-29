@@ -112,6 +112,7 @@ class AvesController extends Controller {
 
 		//get and save image
 		$cantidadImagenesPost = Request::get('cantidadImagenesPost');
+		return $cantidadImagenesPost;
 		for ($instanciaAve=1; $instanciaAve <=$cantidadImagenesPost ; $instanciaAve++) { 
 
 			$image 			= Request::file('img'.$instanciaAve);
