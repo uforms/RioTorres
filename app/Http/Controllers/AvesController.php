@@ -112,22 +112,27 @@ class AvesController extends Controller {
 
 		//get and save image
 		$cantidadImagenesPost = Request::get('cantidadImagenesPost');
-		return $cantidadImagenesPost;
 		for ($instanciaAve=1; $instanciaAve <=$cantidadImagenesPost ; $instanciaAve++) { 
 
 			$image 			= Request::file('img'.$instanciaAve);
 			if($image != null)
 			{
 				$imageInfo 		= new ImagenAve();
-				$cantidadImgs 	= count($ave->imagenesAves()); 
+				$imgCount		= count($tomaAve->imagenesAves->count());
+				//Getting date to add to pictures url
+				$date = date('Y-m-d_H:i:s');
+
+				//To Fix, nombres de las aves para que NUNCA queden igual
+
+				//Si se ingresa un nombre especifico para el ave
 				if($input['imgNombre'.$instanciaAve] != null)
 				{
-					$imageInfo->nombre = $input['imgNombre'.$instanciaAve];
-					$imageInfo->url 		= $cantidadImgs."toma".$tomaAve->id."_".$imageInfo->nombre.".jpg"; 
-				}else
+					$imageInfo->nombre 		= $input['imgNombre'.$instanciaAve];
+					$imageInfo->url 		= $date."_"."ave".$instanciaAve."_"."toma".$tomaAve->id."_".$imageInfo->nombre.".jpg"; 
+				}else //Si no se ingresa algun nombre especifico para el ave
 				{
 					$imageInfo->nombre 	= $image->getClientOriginalName();
-					$imageInfo->url 	= "toma".$tomaAve->id."_".$imageInfo->nombre;
+					$imageInfo->url 	= $date."_"."ave".$instanciaAve."_"."toma".$tomaAve->id."_".$imageInfo->nombre;
 				}
 
 				$imageInfo->ave_id 		= $ave->id;
