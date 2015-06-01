@@ -22,8 +22,9 @@ class ReportController extends Controller {
 		$this->middleware('auth');
 	}
 	
-	public function generate(){
-		Excel::create('Prueba de excel2', function ($excel){
+	public function generateAguasReport(){
+		$date = date('Y-m-d_H:i:s');
+		Excel::create( $date."_Reporte_Toma_de_Aguas", function ($excel){
 			
 			// Set the title
 		    $excel->setTitle('Reporte de ...');
@@ -33,13 +34,10 @@ class ReportController extends Controller {
 		          ->setCompany('Proyecto Río Torres');
 
 		    // Call them separately
-		    $excel->setDescription('Reporte de toma de ...');
+		    $excel->setDescription('Reporte de toma de tomas de aguas');
 
-		    $excel->sheet('Reporte de Tomas', function($sheet){
-		    	$sheet->setPageMargin([
-		    		1.25 , 5.30 , 5.25 , 5.30
-		    	]);
-		        $sheet->protect('password');  
+		    $excel->sheet('Tomas de Aguas', function($sheet){
+		    	 
 
 		    	$sheet->fromArray(TomaAgua::all());
 		    });
