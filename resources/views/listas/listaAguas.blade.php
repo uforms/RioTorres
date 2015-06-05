@@ -80,11 +80,14 @@
 			<div class="col-lg-4">
 			<!-- To Fix   - La relacion no está funcionando bien, para desplegar el contenido hago una comparacion burda -->
 				<strong>Estructura del Banco: </strong>
+				{{$tomaAgua->generalidad->estructuraBanco}}
+				<!--
 				@foreach($estructurasBanco as $estructuraBanco)
 					@if($estructuraBanco->id == $tomaAgua->generalidad->estructuras_banco_id)
 						{{$estructuraBanco->nombre}}
 					@endif
 				@endforeach
+				-->
 				<br>
 			</div>
 
