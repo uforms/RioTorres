@@ -79,15 +79,7 @@
 		<div class="row">
 			<div class="col-lg-4">
 			<!-- To Fix   - La relacion no está funcionando bien, para desplegar el contenido hago una comparacion burda -->
-				<strong>Estructura del Banco: </strong>
-				{{$tomaAgua->generalidad->estructuraBanco}}
-				<!--
-				@foreach($estructurasBanco as $estructuraBanco)
-					@if($estructuraBanco->id == $tomaAgua->generalidad->estructuras_banco_id)
-						{{$estructuraBanco->nombre}}
-					@endif
-				@endforeach
-				-->
+				<strong>Estructura del Banco: </strong> {{$tomaAgua->generalidad->estructuraBanco->nombre}}
 				<br>
 			</div>
 
@@ -222,25 +214,33 @@
 			<!-- fin row -->
 
 		<hr>
-		<h4>Densiómetro: </h4>
+		<h4>Densiómetro <small>(Factor de cobertura = {{$tomaAgua->medidasDensiometro->factor_cobertura}}):</small> </h4>
 		<div class="row">
 			<div class="col-lg-3">
 				<strong>Norte: </strong> {{$tomaAgua->medidasDensiometro->norte}}				
+				<br>
+				<strong>Porcentaje de Cobertura Norte: </strong> {{ 100 - ($tomaAgua->medidasDensiometro->norte * $tomaAgua->medidasDensiometro->factor_cobertura)}} 
 				<br>
 			</div>
 
 			<div class="col-lg-3">
 				<strong>Sur: </strong> {{$tomaAgua->medidasDensiometro->sur}}				
 				<br>
+				<strong>Porcentaje de Cobertura Sur: </strong> {{ 100 - ($tomaAgua->medidasDensiometro->sur * $tomaAgua->medidasDensiometro->factor_cobertura)}} 
+				<br>
 			</div>
 
 			<div class="col-lg-3">
 				<strong>Este: </strong> {{$tomaAgua->medidasDensiometro->este}}				
 				<br>
+				<strong>Porcentaje de Cobertura Este: </strong> {{ 100 - ($tomaAgua->medidasDensiometro->este * $tomaAgua->medidasDensiometro->factor_cobertura)}} 
+				<br>
 			</div>
 
 			<div class="col-lg-3">
 				<strong>Oste: </strong> {{$tomaAgua->medidasDensiometro->oeste}}				
+				<br>
+				<strong>Porcentaje de Cobertura Oeste: </strong> {{ 100 - ($tomaAgua->medidasDensiometro->oeste * $tomaAgua->medidasDensiometro->factor_cobertura)}} 
 				<br>
 			</div>
 		</div>
@@ -251,13 +251,13 @@
 		<div class="row">
 			@foreach($tomaAgua->fisicoQuimico as $fisicoQuimico)
 					<div class="col-lg-4">
-						<strong>Toma # {{$fisicoQuimico->repeticion}}</strong>
+						<strong>Toma # {{$fisicoQuimico->numero_repeticion}}</strong>
 						<ul>
 							<li><strong>O2 (mg/L): </strong> {{$fisicoQuimico->oxigeno_miligramos_litro}}	</li>
 							<li><strong>O2 (%): </strong> {{$fisicoQuimico->oxigeno_porcentaje}}	</li>
 							<li><strong>Temperatura (°C): </strong> {{$fisicoQuimico->temperatura}}	</li>
 							<li><strong>pH: </strong> {{$fisicoQuimico->ph}}	</li>
-							<li><strong>Conduct. (uS/cm): </strong> {{$fisicoQuimico->conductividad}}	</li>
+							<li><strong>Conductividad (uS/cm): </strong> {{$fisicoQuimico->conductividad}}	</li>
 							<li><strong>SST (mg/L): </strong> {{$fisicoQuimico->sst}}	</li>
 						</ul>
 					</div>

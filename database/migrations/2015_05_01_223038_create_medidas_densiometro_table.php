@@ -13,6 +13,7 @@ class CreateMedidasDensiometroTable extends Migration {
 			$table->float('sur');
 			$table->float('este');
 			$table->float('oeste');
+			$table->float('factor_cobertura');
 			$table->integer('toma_agua_id')->unsigned();
 			$table->timestamps();
 			$table->softDeletes();

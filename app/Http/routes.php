@@ -31,7 +31,7 @@ Route::post('tomas/crear/Suelos','SuelosController@store');
 Route::get('/gps','GpsController@index');
 
 //Reports
-Route::get('/reporteAguas','ReportController@generateAguasReport');
+Route::post('/reporteAguas','AguasReporteController@generarReporte');
 
 Route::get('/remuestreo/{numeroAnillo}' , 'AvesController@Remuestra');
 

@@ -18,7 +18,7 @@ class Generalidad extends Model {
 				'clima_id',
 				'curso_id',
 				'parametro_nivel_id',
-				'estructuras_banco_id',
+				'estructura_banco_id',
 				'observacion_estructura_banco',
 				'mo_id',
 				'trabajo_ingenieril_id',

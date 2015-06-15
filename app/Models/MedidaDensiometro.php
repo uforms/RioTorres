@@ -15,6 +15,7 @@ class MedidaDensiometro extends Model {
 			'sur',
 			'este',
 			'oeste',
+			'factor_cobertura',
 			'toma_agua_id'
 	];
 

@@ -177,11 +177,11 @@
 		<h4>Estructura del Banco:</h4>
 		<div class="row">
 			<div class="col-lg-2">
-				{!!Form::label('estructuras_banco_id','Tipo:')!!}
-				<select name="estructuras_banco_id" class="form-control" required>
+				{!!Form::label('estructura_banco_id','Tipo:')!!}
+				<select name="estructura_banco_id" class="form-control" required>
 					<option selected disabled  value=''></option>
 					@foreach($estructurasBanco as $estructuraBanco)
-					@if($estructuraBanco->id == old('estructuras_banco_id')) 
+					@if($estructuraBanco->id == old('estructura_banco_id')) 
 					<option selected="" value="{{$estructuraBanco->id}}">{{$estructuraBanco->nombre}}</option>
 					@else
 					<option value="{{$estructuraBanco->id}}">{{$estructuraBanco->nombre}}</option>
@@ -377,6 +377,12 @@
 	<div class="panel-body collapse" id="collapseDensiometro">
 
 		<div class="row">
+			<div class="col-lg-2">
+				<label for="factor_cobertura">Factor de Cobertura:</label>
+				<input class="form-control" name="factor_cobertura" value="1.04" />
+				<br>
+			</div>
+
 			<div class="col-lg-2">
 				<label for="norte">Norte:</label>
 				<input class="form-control" name="norte" value="{{old('norte')}}" />
