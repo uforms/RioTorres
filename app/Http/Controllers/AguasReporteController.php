@@ -30,10 +30,6 @@ class AguasReporteController extends Controller {
 		//return array_values($this->getFisicoQuimicos());
 
 		Excel::create( $date."_Reporte_Toma_de_Aguas", function ($excel) use ($input) {
-			
-
-			$generalidades 	= array();
-			$vegetacion		= array();
 
 			//Array donde se guarda toda la info
 			$data 			= array();
@@ -67,7 +63,7 @@ class AguasReporteController extends Controller {
 		          ->setCompany('Proyecto Río Torres');
 
 		    // Call them separately
-		    $excel->setDescription('Reporte de toma de tomas de aguas');
+		    $excel->setDescription('Reporte de toma de Aguas');
 
 		    $excel->sheet('Tomas de Aguas', function($sheet) use ($data) {
 
@@ -101,7 +97,7 @@ class AguasReporteController extends Controller {
 	    		
 
 		    	//$sheet->fromArray(TomaAgua::all(), null, 'A1', false, true);
-		    });
+		    });//End excel->sheet
 		    
 
         //})->store('xlsx' , storage_path('reportesGenerados') , true)->export('xlsx');
@@ -300,7 +296,7 @@ class AguasReporteController extends Controller {
 			$oeste[]	= 100 - ($tomaAgua->medidasDensiometro->oeste * $tomaAgua->medidasDensiometro->factor_cobertura);
 		}
 
-		return $densiometro = compact("norte", "sur","este","oeste");
+		return compact("norte", "sur","este","oeste");
 	}
 
 	public function getFisicoQuimicos(){

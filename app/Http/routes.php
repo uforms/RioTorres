@@ -32,6 +32,7 @@ Route::get('/gps','GpsController@index');
 
 //Reports
 Route::post('/reporteAguas','AguasReporteController@generarReporte');
+Route::post('/reporteAves' ,'AvesReporteController@generarReporte');
 
 Route::get('/remuestreo/{numeroAnillo}' , 'AvesController@Remuestra');
 

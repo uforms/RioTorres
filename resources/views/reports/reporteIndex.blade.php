@@ -20,11 +20,11 @@
           <!-- Tab panes -->
           <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="home">
-              @include('reports.reportAguas')
+              @include('reports.reporteAguas')
             </div>
 
             <div role="tabpanel" class="tab-pane" id="profile">
-              
+              @include('reports.reporteAves')
             </div>
 
             <div role="tabpanel" class="tab-pane" id="messages">

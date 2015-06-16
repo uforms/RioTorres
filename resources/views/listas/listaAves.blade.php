@@ -106,24 +106,6 @@
 				<br>
 			</div>
 
-			<div class="col-lg-4">
-				<h4>Medidas Biométricas: </h4>
-				<strong>Peso: </strong> {{$tomaAve->medidaBiometrica->peso}}
-				<br>
-				<strong>Ala: </strong> {{$tomaAve->medidaBiometrica->ala}}
-				<br>
-				<strong>Plumaje: </strong> {{$tomaAve->medidaBiometrica->plumaje}}
-				<br>
-				<strong>Edad: </strong> {{$tomaAve->medidaBiometrica->edad}}
-				<br>
-				<strong>Sexo: </strong> {{$tomaAve->medidaBiometrica->sexo}}
-				<br>
-				<strong>Muestra Endoparásito: </strong> {{$tomaAve->medidaBiometrica->muestra_endoparasito}}
-				<br>
-				<strong>Muestra Ectoparásito: </strong> {{$tomaAve->medidaBiometrica->muestra_ectoparasito}}
-				<br>
-			</div>
-
 			<div class="col-lg-3">
 				<h4>Exámen General: </h4>
 				<strong>Red: </strong> {{$tomaAve->examenGeneral->red}}
@@ -141,6 +123,24 @@
 				<strong>Pa: </strong> {{$tomaAve->examenGeneral->pa}}
 				<br>
 				<strong>Al: </strong> {{$tomaAve->examenGeneral->al}}
+				<br>
+			</div>
+
+			<div class="col-lg-4">
+				<h4>Medidas Biométricas: </h4>
+				<strong>Peso: </strong> {{$tomaAve->medidaBiometrica->peso}}
+				<br>
+				<strong>Ala: </strong> {{$tomaAve->medidaBiometrica->ala}}
+				<br>
+				<strong>Plumaje: </strong> {{$tomaAve->medidaBiometrica->plumaje}}
+				<br>
+				<strong>Edad: </strong> {{$tomaAve->medidaBiometrica->edad}}
+				<br>
+				<strong>Sexo: </strong> {{$tomaAve->medidaBiometrica->sexo}}
+				<br>
+				<strong>Muestra Endoparásito: </strong> {{$tomaAve->medidaBiometrica->muestra_endoparasito}}
+				<br>
+				<strong>Muestra Ectoparásito: </strong> {{$tomaAve->medidaBiometrica->muestra_ectoparasito}}
 				<br>
 			</div>
 

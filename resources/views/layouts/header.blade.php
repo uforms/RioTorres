@@ -51,4 +51,4 @@
 <!-- Modal for reports -->
 <!-- Button trigger modal -->
 
-@include('reports.reportIndex')
+@include('reports.reporteIndex')
