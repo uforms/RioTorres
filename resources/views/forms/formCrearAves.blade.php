@@ -20,7 +20,7 @@
 
 			<div class="col-lg-2">
 				{!!Form::label('numero_anillo','Número de anillo:')!!}
-				<input id="numero_anillo" type="number" class="form-control" name="numero_anillo" value="{{old('numero_anillo')}}" min="0">
+				<input id="numero_anillo" type="number" step="1" min="0" class="form-control" name="numero_anillo" value="{{old('numero_anillo')}}" min="0">
 				<br>
 			</div>
 
@@ -220,15 +220,15 @@
 
 	<div class="panel-body collapse" id="collapseMedidaBiometrica">
 		<div class="row">
-			<div class="col-lg-1">
+			<div class="col-lg-2">
 				{!!Form::label('peso','Peso:')!!}
-				<input type="text" class="form-control" name="peso" placeholder="g" value="{{old('peso')}}">
+				<input type="number" step="0.01" min="0" class="form-control" name="peso" placeholder="g" value="{{old('peso')}}">
 				<br>
 			</div>
 
-			<div class="col-lg-1">
+			<div class="col-lg-2">
 				{!!Form::label('ala','Ala:')!!}
-				<input type="text" class="form-control" name="ala" placeholder="cm" value="{{old('ala')}}">
+				<input type="number" step="0.01" min="0" class="form-control" name="ala" placeholder="cm" value="{{old('ala')}}">
 				<br>
 			</div>
 

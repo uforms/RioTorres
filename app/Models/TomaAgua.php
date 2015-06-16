@@ -23,7 +23,10 @@ class TomaAgua extends Model {
 				'temperatura',
 				'viento',
 				'observaciones',
+				'fecha',
 				'coliformes',
+				'lat',
+				'lng',
 	];
 
 	public function generalidad()

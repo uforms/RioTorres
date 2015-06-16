@@ -43,6 +43,13 @@
 		</div>
 		@endif
 
+		@if( ($type == 'Aguas' && count($tomasAguas)== 0) || ($type == 'Aves' && count($tomasAves)== 0) || ($type == 'Suelos' && isset($tomasSuelos) && count($tomasSuelos)== 0))
+			<div class="row">
+				<div class="col-lg-12">
+				<h3>No hay tomas de {{$type}}</h3>
+				</div>
+			</div>
+		@endif
 		
 		@include('listas.lista'.$type)
 	</div>

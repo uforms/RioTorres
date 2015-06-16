@@ -15,18 +15,21 @@ Route::get('/', 'WelcomeController@index');
 
 Route::get('home', 'HomeController@index');
 
-Route::get('tomas/Aves','AvesController@index');
 Route::get('tomas/Aguas','AguasController@index');
+Route::get('tomas/Aves','AvesController@index');
 Route::get('tomas/Suelos','SuelosController@index');
 
-
-Route::get('tomas/crear/Aves' , 'AvesController@create');
 Route::get('tomas/crear/Aguas' , 'AguasController@create');
+Route::get('tomas/crear/Aves' , 'AvesController@create');
 Route::get('tomas/crear/Suelos' , 'SuelosController@create');
 
-Route::post('tomas/crear/Aves','AvesController@store');
 Route::post('tomas/crear/Aguas','AguasController@store');
+Route::post('tomas/crear/Aves','AvesController@store');
 Route::post('tomas/crear/Suelos','SuelosController@store');
+
+Route::get('tomas/editar/Aguas/{tomaId}' , 'AguasController@edit');
+
+Route::post('tomas/editar/Aguas' , 'AguasController@');
 
 Route::get('/gps','GpsController@index');
 

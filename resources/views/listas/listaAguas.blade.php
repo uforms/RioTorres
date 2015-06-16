@@ -4,7 +4,6 @@
 	</div>
 </div>
 
-
 @foreach($tomasAguas as $tomaAgua)
 
 <div class="panel panel-primary">
@@ -15,7 +14,7 @@
 			</div>
 
 			<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
-				<p><strong>Fecha: </strong>  {{substr($tomaAgua->created_at,0,11)}}</p>
+				<p><strong>Fecha: </strong>  {{($tomaAgua->fecha)}}</p>
 			</div>
 
 			<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
@@ -40,6 +39,45 @@
 		<!-- Fin panel heading -->
 
 	<div class="panel-body collapse" id="collapseToma{{$tomaAgua->id}}">
+
+		<div class="row">
+			<div class="col-lg-12  text-right ">
+				<a href="/tomas/editar/Aguas/{{$tomaAgua->id}}" title="Editar" class="btn btn-info btn-xs"><i class="glyphicon glyphicon-edit"></i></a>
+				&nbsp &nbsp
+				<a href="#" title="Eliminar" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove"></i></a>
+			</div>	
+		</div>
+
+		<h4>Información Básica: </h4>
+		<div class="row">
+			<div class="col-lg-2">
+				<strong>Latitud: </strong> {{$tomaAgua->lat}}
+				<br>
+			</div>
+
+			<div class="col-lg-2">
+				<strong>Longitud: </strong> {{$tomaAgua->lng}}
+				<br>
+			</div>
+
+			<div class="col-lg-2">
+				<strong>Temperatura : </strong> {{$tomaAgua->temperatura}} °C
+				<br>
+			</div>
+
+			<div class="col-lg-2">
+				<strong>Viento : </strong> {{$tomaAgua->viento}} (m/s)
+				<br>
+			</div>
+
+			<div class="col-lg-2">
+				<strong>Humedad : </strong> {{$tomaAgua->humedad}} (%)
+				<br>
+			</div>
+
+		</div>
+
+		<hr>
 		<h4>Generalidades: </h4>
 		<div class="row">
 			<div class="col-lg-2">
@@ -78,7 +116,6 @@
 		<br>
 		<div class="row">
 			<div class="col-lg-4">
-			<!-- To Fix   - La relacion no está funcionando bien, para desplegar el contenido hago una comparacion burda -->
 				<strong>Estructura del Banco: </strong> {{$tomaAgua->generalidad->estructuraBanco->nombre}}
 				<br>
 			</div>

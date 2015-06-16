@@ -35,12 +35,16 @@ class AguasReporteController extends Controller {
 			$data 			= array();
 			
 			// Obtener datos deseados por el usuario
-			// Las generalidades siempre se cargan por default
+			// La Info Basica siempre se cargan por default
+
+			if(array_key_exists("infoBasica", $input)){
+				$infoBasica = $this->getInfoBasica();
+				array_push($data, $infoBasica);
+			}
 			if(array_key_exists("generalidades", $input)){
 				$generalidades = $this->getGeneralidades();
 				array_push($data, $generalidades);
 			}
-			
 			if(array_key_exists("vegetacion" , $input)){
 				$vegetacion = $this->getVegetacion();
 				array_push($data , $vegetacion);
@@ -110,12 +114,7 @@ class AguasReporteController extends Controller {
 		$tiposCauces	= TipoCauce::all();
 
 		//Setting titles
-		$id[] 					= "id";
-		$fecha[]				= "fecha";
-		$horaInicial[]			= "hora inicial";
-		$horaFinal[]			= "hora final";
-		$sitio[]				= "sitio";
-		$autor[]				= "Realizada por";
+		
 		$clima[]				= "Clima";
 		$curso[]				= "Curso";
 		$nivelAgua[]			= "Nivel Agua en función de";
@@ -127,12 +126,7 @@ class AguasReporteController extends Controller {
 
 		//Setting Data
 		foreach($tomasAguas as $tomaAgua){
-			$id[] 			= $tomaAgua->id;
-			$fecha[]		= substr($tomaAgua->created_at,0,11);
-			$horaInicial[]	= $tomaAgua->hora_inicial;
-			$horaFinal[]	= $tomaAgua->hora_final;
-			$sitio[]		= $tomaAgua->sitio->name;
-			$autor[]		= $tomaAgua->user->name;
+			
 			$clima[]		= $tomaAgua->generalidad->clima->nombre;
 			$curso[]		= $tomaAgua->generalidad->curso->nombre;
 			$nivelAgua[]	= $tomaAgua->generalidad->parametroNivel->nombre;
@@ -145,12 +139,6 @@ class AguasReporteController extends Controller {
 
 		//To Fix --- Aca se podria diferenciar entre que desplegar y que no
 		$misGeneralidades = [
-			'id',
-			'fecha' , 
-			'horaInicial' ,
-			'horaFinal',
-			'sitio',
-			'autor',
 			'clima',
 			'curso',
 			'nivelAgua',
@@ -205,6 +193,41 @@ class AguasReporteController extends Controller {
 		
 
 		return $generalidades;
+	}
+
+
+	public function getInfoBasica(){
+		$tomasAguas = TomaAgua::all();
+
+		//Setting titles
+		$id[] 					= "id";
+		$fecha[]				= "fecha";
+		$horaInicial[]			= "hora inicial";
+		$horaFinal[]			= "hora final";
+		$sitio[]				= "sitio";
+		$autor[]				= "Realizada por";
+		$lat[]					= "Latitud";
+		$lng[]					= "Longitud";
+		$temperatura[] 			= "Temperatura";
+		$viento[]				= "Viento";
+		$humedad[]				= "Humedad";
+
+
+		foreach($tomasAguas as $tomaAgua){
+			$id[] 			= $tomaAgua->id;
+			$fecha[]		= substr($tomaAgua->created_at,0,11);
+			$horaInicial[]	= $tomaAgua->hora_inicial;
+			$horaFinal[]	= $tomaAgua->hora_final;
+			$sitio[]		= $tomaAgua->sitio->name;
+			$autor[]		= $tomaAgua->user->name;
+			$lat[]			= $tomaAgua->lat;
+			$lng[]			= $tomaAgua->lng;
+			$temperatura[] 	= $tomaAgua->temperatura;
+			$viento[]		= $tomaAgua->viento;
+			$humedad[]		= $tomaAgua->humedad;
+		}
+
+		return compact('id', 'fecha' , 'horaFinal' , 'horaFinal','autor' , 'lat' , 'lng' , 'temperatura' , 'viento' , 'humedad');
 	}
 
 	public function getVegetacion(){

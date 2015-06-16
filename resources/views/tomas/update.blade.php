@@ -6,7 +6,7 @@
 <div class="row custom-header">
 	<div class="container">
 	<div class="col-lg-12">
-		<h1 class="h1-custom">Realizando toma de {{$type}}...
+		<h1 class="h1-custom">Actualizando toma # {{$tomaAgua->id}} de {{$type}}
 			<small></small>
 		</h1>
 	</div>
@@ -19,7 +19,7 @@
 		<ol class="breadcrumb breadcrumb-custom">
 			<li><a href="/">Actividades</a></li>
 			<li ><a href="/tomas/{{$type}}">{{$type}} </a></li>
-			<li class="active">Crear</li>
+			<li class="active">Editar</li>
 		</ol>
 	</div>
 	</div>
@@ -38,7 +38,7 @@
 	</div>
 @endif
 
-@include('forms.formCrear'.$type)
+@include('forms.formEditar'.$type)
 </div>
 
 
@@ -64,16 +64,19 @@
 
  $.datepicker.setDefaults($.datepicker.regional['es']);
 
+
 $(function () {
 	$(".datepicker").datepicker();
+	/*
 	@if(old('fecha') == null)
 		$(".datepicker").datepicker('setDate', new Date());
 	@else
 		$(".datepicker").val("{{old('fecha')}}");
 		//$("#datepicker").datepicker('setDate', {{old('fecha')}});
 	@endif
-	
+	*/
 });
+
 </script>
 
 @stop

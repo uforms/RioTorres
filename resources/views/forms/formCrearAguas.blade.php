@@ -434,7 +434,7 @@
 				<br>
 			</div>
 
-			<div class="col-lg-1">
+			<div class="col-lg-2">
 				<label for="temperatura{{$i}}">T (°C):</label>
 				<input type="number" step="0.01"   class="form-control" name="temperatura{{$i}}" value="{{old('temperatura'.$i)}}"/>
 				<br>

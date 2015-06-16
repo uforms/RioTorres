@@ -57,9 +57,8 @@ class AguasController extends Controller {
 	public function index()
 	{
 		$type = 'Aguas';
-		$estructurasBanco = EstructuraBanco::all();
 		$tomasAguas = TomaAgua::orderBy('created_at', 'desc')->paginate(5);
-		return view('tomas.index',compact('type','tomasAguas' , 'estructurasBanco'));
+		return view('tomas.index',compact('type','tomasAguas' ));
 	}
 
 	/**
@@ -125,7 +124,7 @@ class AguasController extends Controller {
 
 				'hora_inicial'				=>	'required | string',
 				'hora_final'				=>	'required | string',
-				'fecha'						=>	'string',
+				'fecha'						=>	'required | string',
 				'sitio_id'					=>	'required',
 				'lat'						=>	'required',
 				'lng'						=>	'required',
@@ -286,7 +285,7 @@ class AguasController extends Controller {
 	 */
 	public function show($id)
 	{
-		//
+
 	}
 
 	/**
@@ -297,7 +296,50 @@ class AguasController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+		$type 						= 'Aguas';
+		$tomaAgua 					= TomaAgua::find($id);
+		$sitios 					= Sitio::all();
+		$epocas 					= Epoca::all();
+		$climas 					= Clima::all();
+		$cursos 					= Curso::all();
+		$tiposCauces 				= TipoCauce::all();
+		$parametrosNivel 			= ParametroNivel::all();
+		$mos 						= Mo::all();
+		$trabajosIngenieriles		= TrabajoIngenieril::all();
+		$tiposSustratos				= TipoSustrato::all();
+		$tiposCondicionesSustratos 	= TipoCondicionSustrato::all();
+		$estructurasBanco			= EstructuraBanco::all();
+		$tiposExposicionCauce		= TipoExposicionCauce::all();
+		$tiposRiberas				= TipoRibera::all();
+		$tiposAmbientesAsociados	= TipoAmbienteAsociado::all();
+		$presenciasRs				= PresenciaRs::all();
+		$contPuntuales				= ContPuntual::all();
+		$coloresAgua				= ColorAgua::all();
+		$oloresAgua					= OlorAgua::all();
+
+		return view('tomas.update',compact(
+											'type',
+											'tomaAgua',
+											'sitios',
+											'epocas',
+											'climas',
+											'cursos',
+											'tiposCauces',
+											'parametrosNivel',
+											'mos',
+											'trabajosIngenieriles',
+											'tiposSustratos',
+											'tiposCondicionesSustratos',
+											'estructurasBanco',
+											'tiposExposicionCauce',
+											'tiposRiberas',
+											'tiposAmbientesAsociados',
+											'contPuntuales',
+											'presenciasRs',
+											'coloresAgua',
+											'oloresAgua'
+											))
+									->with('type',$this->type);
 	}
 
 	/**

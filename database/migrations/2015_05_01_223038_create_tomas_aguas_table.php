@@ -17,7 +17,10 @@ class CreateTomasAguasTable extends Migration {
 			$table->float('temperatura');
 			$table->float('viento');
 			$table->text('observaciones');
+			$table->string('fecha' , 12);
 			$table->string('coliformes',4);
+			$table->float('lat' ,10 , 6 );
+			$table->float('lng' ,10 , 6 );
 			$table->timestamps();
 			$table->softDeletes();
 		});

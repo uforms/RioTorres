@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 //Models
+use App\Models\TomaSuelo;
 use App\Models\Sitio;
 use App\Models\Parcela;
 
@@ -27,7 +28,8 @@ class SuelosController extends Controller {
 	public function index()
 	{
 		$type = 'Suelos';
-		return view('tomas.index',compact('type'));
+		$tomasSuelos = TomaSuelo::orderBy('created_at', 'desc')->paginate(5);
+		return view('tomas.index',compact('type' , 'tomasSuelos'));
 	}
 
 	/**
