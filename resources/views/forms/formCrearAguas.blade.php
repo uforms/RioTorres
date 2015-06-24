@@ -418,7 +418,7 @@
 
 	<div class="panel-body collapse" id="collapseFisicoQuimico">
 
-
+		<input type="hidden" name="cantTomasFisicoQuimicos" value="3">
 		@for($i = 1 ; $i<=3 ; $i++)
 		<h4>Toma #{{$i}}:</h4>
 		<div class="row">

@@ -251,7 +251,8 @@ class AguasController extends Controller {
 		$caracterizacionVisual = CaracterizacionVisual::create($input);
 
 		//Datos FisicoQuimicos
-		for ($i=1; $i <=3 ; $i++) { 
+		$cantTomasFisicoQuimico = $input['cantTomasFisicoQuimicos'];
+		for ($i=1; $i <=$cantTomasFisicoQuimico ; $i++) { 
 			$fisicoQuimico = new FisicoQuimico();
 
 			$fisicoQuimico->numero_repeticion 			= $i;
@@ -348,9 +349,158 @@ class AguasController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update()
 	{
-		//
+		$input 							= Request::all();
+		$tiposCauces 					= TipoCauce::all();
+		$tiposSustratos 				= TipoSustrato::all();
+		$tiposCondicionesSustratos 		= TipoCondicionSustrato::all();
+		$tiposExposicionesCauce			= TipoExposicionCauce::all();
+		$tiposAmbientesAsociados 		= TipoAmbienteAsociado::all();
+		$tiposRiberas 					= TipoRibera::all();
+
+
+		// Obteniendo modelos a modificar
+		$tomaAgua 						= TomaAgua::find($input['tomaId']);
+		$generalidades 					= Generalidad::where('toma_agua_id' , '=' ,$tomaAgua->id  )->firstOrFail();
+		$vegetacion 					= Vegetacion::where('toma_agua_id' , '=' , $tomaAgua->id  )->firstOrFail();
+		$caracterizacionVisual			= CaracterizacionVisual::where('toma_agua_id' , '=' , $tomaAgua->id)->firstOrFail();
+		$medidaDensiometro 				= MedidaDensiometro::where('toma_agua_id' , '=' , $tomaAgua->id)->firstOrFail();
+		$fisicoQuimicos 				= FisicoQuimico::where('toma_agua_id' , '=' , $tomaAgua->id)->get();
+
+		/*
+		|	Modificacion de Modelos con valores multiples
+		*/
+
+		//Obteniendo valores de los tipos de cauces
+		foreach($tiposCauces as $tipoCauce){
+			if(isset($input['cauce'.$tipoCauce->id])){
+				//Cargar
+				$valorCauce = ValorCauce::where('tipo_cauce_id'  , '=' , $tipoCauce->id)
+										->where('generalidad_id' , '=' , $tomaAgua->generalidad->id)
+										->firstOrFail();
+				//Actualiza
+				$valorCauce->valor 			= 	$input['cauce'.$tipoCauce->id];
+				//Acumula cambios
+				$valoresCauces[] = $valorCauce;
+
+			}
+		}//end foreach
+
+		//Obteniendo valores de Composicion del sustrato
+		foreach($tiposSustratos as $tipoSustrato){
+			if(isset($input['composicionSustrato'.$tipoSustrato->id])){
+				//Carga
+				$porcentajeComposicionSustrato = PorcentajeComposicionSustrato::where('tipo_sustrato_id' , '=' , $tipoSustrato->id)
+												->where('generalidad_id' , '=' , $tomaAgua->generalidad->id)
+												->firstOrFail();
+
+				//Actualizar el modelo
+				$porcentajeComposicionSustrato->porcentaje 			= $input['composicionSustrato'.$tipoSustrato->id];
+				//Acumula cambios
+				$porcentajesComposicionesSustratos[] = $porcentajeComposicionSustrato;
+			}
+		}//end foreach
+
+		//Obteniendo valores Condicion sustrato
+		foreach($tiposCondicionesSustratos as $TipoCondicionSustrato){
+			if(isset($input['condicionSustrato'.$TipoCondicionSustrato->id])){
+
+				$porcentajeCondicionSustrato = PorcentajeCondicionSustrato::where('tipo_condicion_sustrato_id' , '=' , $TipoCondicionSustrato->id)
+																		->where('generalidad_id' , '=' ,$tomaAgua->generalidad->id)
+																		->firstOrFail();
+
+				$porcentajeCondicionSustrato->porcentaje 					= $input['condicionSustrato'.$TipoCondicionSustrato->id];
+
+				$porcentajesCondicionesSustratos[] = $porcentajeCondicionSustrato;
+
+			}//end if
+		}
+
+		//Obteniendo valores de los porcentajes de la exposicion del cauce
+		foreach($tiposExposicionesCauce as $tipoExposicionCauce){
+			if(isset($input['tipoExposicionCauce'.$tipoExposicionCauce->id])){
+
+				$porcentajeExposicionCauce = PorcentajeExposicionCauce::where('tipo_exposicion_cauce_id' , '=' , $tipoExposicionCauce->id)
+																	->where('vegetacion_id' , '=' ,$vegetacion->id)
+																	->firstOrFail();
+
+				$porcentajeExposicionCauce->porcentaje 					= $input['tipoExposicionCauce'.$tipoExposicionCauce->id];  
+
+				$porcentajesExposicionesCauce[] = $porcentajeExposicionCauce;
+			}// fin if
+		}
+
+		//Obteniendo valores de tipos de riberas
+		foreach($tiposRiberas as $tipoRibera){
+			if(isset($input['tipoRibera'.$tipoRibera->id])){
+				$porcentajeTipoRibera = PorcentajeTipoRibera::where('tipo_ribera_id' , '=' , $tipoRibera->id)
+															->where('vegetacion_id' , '=' , $vegetacion->id)
+															->firstOrFail();
+
+				$porcentajeTipoRibera->porcentaje 		= $input['tipoRibera'.$tipoRibera->id];
+
+				$porcentajesTiposRiberas[] = $porcentajeTipoRibera;
+				
+			}// fin if
+		}
+
+		//Obteniendo valores de los porcentajes de los ambientes asociados
+		foreach($tiposAmbientesAsociados as $tipoAmbienteAsociado){
+			if(isset($input['tipoAmbienteAsociado'.$tipoAmbienteAsociado->id])){
+				$porcentajeAmbienteAsociado = PorcentajeAmbienteAsociado::where('tipo_ambiente_asociado_id' ,'=' , $tipoAmbienteAsociado->id)
+																		->where('vegetacion_id' , '=' , $vegetacion->id)
+																		->firstOrFail();
+
+				$porcentajeAmbienteAsociado->porcentaje 				= $input['tipoAmbienteAsociado'.$tipoAmbienteAsociado->id];
+
+				$porcentajesAmbientesAsociados[] = $porcentajeAmbienteAsociado;
+			}
+		}
+
+		foreach ($fisicoQuimicos as $fisicoQuimico) {
+			
+		}
+
+		/*
+		|	Modificacion de Modelos con valores simples (solo uno)
+		*/
+		$tomaAgua 				->fill($input);
+		$generalidades 			->fill($input);
+		$vegetacion 			->fill($input);
+		$caracterizacionVisual 	->fill($input);
+		$medidaDensiometro 		->fill($input);
+
+
+		/*
+		|	Guardando modelos
+		*/
+		$tomaAgua 					->save();
+		$generalidades 				->save();
+		$vegetacion 				->save();
+		$caracterizacionVisual 		->save();
+		$medidaDensiometro 			->save();
+
+		foreach($valoresCauces as $valorCauce){
+			$valorCauce->save();
+		}
+		foreach($porcentajesComposicionesSustratos as $porcentajeComposicionSustrato){
+			$porcentajeComposicionSustrato->save();
+		}
+		foreach($porcentajesCondicionesSustratos as $porcentajeCondicionSustrato){
+			$porcentajeCondicionSustrato->save();
+		}
+		foreach($porcentajesExposicionesCauce as $porcentajeExposicionCauce){
+			$porcentajeExposicionCauce->save();
+		}
+		foreach($porcentajesTiposRiberas as $porcentajeTipoRibera){
+			$porcentajeTipoRibera->save();
+		}
+		foreach($porcentajesAmbientesAsociados as $porcentajeAmbienteAsociado){
+				$porcentajeAmbienteAsociado->save();
+		}
+
+		return Redirect::back();
 	}
 
 	/**

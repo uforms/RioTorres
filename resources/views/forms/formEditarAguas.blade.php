@@ -1,5 +1,7 @@
 {!!Form::open(['url' => '/tomas/editar/Aguas' , 'files'=>true]) !!}
 
+<input type="hidden" name="tomaId" value="{{$tomaAgua->id}}">
+
 <div class="panel panel-primary">
 	<div class="panel-heading panel-heading-custom" data-toggle="collapse" href="#collapseInfoBasica" aria-expanded="false" aria-controls="collapseInfoBasica"><strong class="glyphicon glyphicon-resize-full"></strong>&nbsp Información Básica:</div>
 
@@ -253,7 +255,17 @@
 			@foreach($tiposCondicionesSustratos as $tipoCondicionSustrato)
 			<div class="col-lg-2">
 				{!!Form::label('condicionSustrato'.$tipoCondicionSustrato->id,$tipoCondicionSustrato->nombre)!!}
-				<input type="number" step="0.01" min="0" name="condicionSustrato{{$tipoCondicionSustrato->id}}" class="form-control" value="{{old('condicionSustrato'.$tipoCondicionSustrato->id)}}" required>
+				<?php $found=0; ?>
+				@foreach($tomaAgua->generalidad->porcentajesCondicionesSustratos as $porCondicionSus)
+					@if($tipoCondicionSustrato->id == $porCondicionSus->tipo_condicion_sustrato_id)
+						<input type="number" step="0.01" min="0" name="condicionSustrato{{$tipoCondicionSustrato->id}}" class="form-control" value="{{$porCondicionSus->porcentaje}}" required>
+						<?php $found=1; ?>
+					@endif
+				@endforeach
+
+				@if($found == 0)
+					<input type="number" step="0.01" min="0" name="condicionSustrato{{$tipoCondicionSustrato->id}}" class="form-control" value="{{old('condicionSustrato'.$tipoCondicionSustrato->id)}}" required>
+				@endif
 				<br>
 			</div>
 			@endforeach
@@ -271,7 +283,7 @@
 		<div class="row">
 			<div class="col-lg-3">
 				{!!Form::label('porcentaje_vegetacion_banco','Vegetación en el banco (%): ')!!}
-				<input type="number" step="0.01" min="0" name="porcentaje_vegetacion_banco" class="form-control" value="{{old('porcentaje_vegetacion_banco')}}" required>
+				<input type="number" step="0.01" min="0" name="porcentaje_vegetacion_banco" class="form-control" value="{{$tomaAgua->vegetaciones->porcentaje_vegetacion_banco}}" required>
 				<br>
 			</div>
 		</div>
@@ -282,7 +294,18 @@
 			@foreach($tiposExposicionCauce as $tipoExposicionCauce)
 			<div class="col-lg-2">
 				{!!Form::label('tipoExposicionCauce'.$tipoExposicionCauce->id,$tipoExposicionCauce->nombre)!!}
-				<input type="number" step="0.01" min="0" name="tipoExposicionCauce{{$tipoExposicionCauce->id}}" class="form-control" value="{{old('tipoExposicionCauce'.$tipoExposicionCauce->id)}}" required>
+				<?php $found=0; ?>
+				@foreach($tomaAgua->vegetaciones->porcentajesExposicionCauce as $porExpoCauce)
+					@if($tipoExposicionCauce->id == $porExpoCauce->tipo_exposicion_cauce_id)
+						<input type="number" step="0.01" min="0" name="tipoExposicionCauce{{$tipoExposicionCauce->id}}" class="form-control" value="{{$porExpoCauce->porcentaje}}" required>
+						<?php $found=1; ?>
+					@endif
+				@endforeach
+
+				@if($found == 0)
+					<input type="number" step="0.01" min="0" name="tipoExposicionCauce{{$tipoExposicionCauce->id}}" class="form-control" value="{{old('tipoExposicionCauce'.$tipoExposicionCauce->id)}}" required>
+				@endif
+				
 				<br>
 			</div>
 			@endforeach
@@ -294,7 +317,17 @@
 			@foreach($tiposRiberas as $tipoRibera)
 			<div class="col-lg-2">
 				{!!Form::label('tipoRibera'.$tipoRibera->id,$tipoRibera->nombre)!!}
-				<input type="number" step="0.01" min="0" name="tipoRibera{{$tipoRibera->id}}" class="form-control" value="{{old('tipoRibera'.$tipoRibera->id)}}" required>
+				<?php $found=0; ?>
+				@foreach($tomaAgua->vegetaciones->porcentajesTipoRibera as $porTipoRibera)
+					@if($tipoRibera->id == $porTipoRibera->tipo_ribera_id)
+						<input type="number" step="0.01" min="0" name="tipoRibera{{$tipoRibera->id}}" class="form-control" value="{{$porTipoRibera->porcentaje}}" required>
+						<?php $found=1; ?>
+					@endif
+				@endforeach
+
+				@if($found ==0)
+					<input type="number" step="0.01" min="0" name="tipoRibera{{$tipoRibera->id}}" class="form-control" value="{{old('tipoRibera'.$tipoRibera->id)}}" required>
+				@endif
 				<br>
 			</div>
 			@endforeach
@@ -306,7 +339,17 @@
 			@foreach($tiposAmbientesAsociados as $tipoAmbienteAsociado)
 			<div class="col-lg-2">
 				{!!Form::label('tipoAmbienteAsociado'.$tipoAmbienteAsociado->id,$tipoAmbienteAsociado->nombre)!!}
-				<input type="number" step="0.01" min="0" name="tipoAmbienteAsociado{{$tipoAmbienteAsociado->id}}" class="form-control" value="{{old('tipoAmbienteAsociado'.$tipoAmbienteAsociado->id)}}" required>
+				<?php $found=0; ?>
+				@foreach($tomaAgua->vegetaciones->porcentajesAmbientesAsociados as $porAmbienteAso)
+					@if($tipoAmbienteAsociado->id == $porAmbienteAso->tipo_ambiente_asociado_id)
+						<input type="number" step="0.01" min="0" name="tipoAmbienteAsociado{{$tipoAmbienteAsociado->id}}" class="form-control" value="{{$porAmbienteAso->porcentaje}}" required>
+						<?php $found=1; ?>
+					@endif
+				@endforeach
+
+				@if($found ==0)
+					<input type="number" step="0.01" min="0" name="tipoAmbienteAsociado{{$tipoAmbienteAsociado->id}}" class="form-control" value="{{old('tipoAmbienteAsociado'.$tipoAmbienteAsociado->id)}}" required>
+				@endif
 				<br>
 			</div>
 			@endforeach
@@ -329,7 +372,7 @@
 				<select name="presencia_rs_id" class="form-control" required>
 					<option selected disabled  value=''></option>
 					@foreach($presenciasRs as $presenciaRs)
-					@if($presenciaRs->id == old('presencia_rs_id')) 
+					@if($presenciaRs->id == $tomaAgua->caracterizacionVisual->presenciaRs->id) 
 					<option selected="" value="{{$presenciaRs->id}}" >{{$presenciaRs->nombre}}</option>
 					@else
 					<option value="{{$presenciaRs->id}}" >{{$presenciaRs->nombre}}</option>
@@ -344,7 +387,7 @@
 				<select name="cont_puntual_id" class="form-control" required>
 					<option selected disabled  value=''></option>
 					@foreach($contPuntuales as $contPuntual)
-					@if($contPuntual->id == old('cont_puntual_id')) 
+					@if($contPuntual->id == $tomaAgua->caracterizacionVisual->contPuntual->id) 
 					<option selected="" value="{{$contPuntual->id}}" >{{$contPuntual->nombre}}</option>
 					@else
 					<option value="{{$contPuntual->id}}" >{{$contPuntual->nombre}}</option>
@@ -359,7 +402,7 @@
 				<select name="color_agua_id" class="form-control" required>
 					<option selected disabled  value=''></option>
 					@foreach($coloresAgua as $colorAgua)
-					@if($colorAgua->id == old('color_agua_id')) 
+					@if($colorAgua->id == $tomaAgua->caracterizacionVisual->colorAgua->id) 
 					<option selected="" value="{{$colorAgua->id}}" >{{$colorAgua->nombre}}</option>
 					@else
 					<option value="{{$colorAgua->id}}" >{{$colorAgua->nombre}}</option>
@@ -374,7 +417,7 @@
 				<select name="olor_agua_id" class="form-control" required>
 					<option selected disabled  value=''></option>
 					@foreach($oloresAgua as $olorAgua)
-					@if($olorAgua->id == old('olor_agua_id')) 
+					@if($olorAgua->id == $tomaAgua->caracterizacionVisual->olorAgua->id) 
 					<option selected="" value="{{$olorAgua->id}}" >{{$olorAgua->nombre}}</option>
 					@else
 					<option value="{{$olorAgua->id}}" >{{$olorAgua->nombre}}</option>
@@ -400,31 +443,31 @@
 		<div class="row">
 			<div class="col-lg-2">
 				<label for="factor_cobertura">Factor de Cobertura:</label>
-				<input class="form-control" name="factor_cobertura" value="1.04" />
+				<input class="form-control" name="factor_cobertura" value="{{$tomaAgua->medidasDensiometro->factor_cobertura}}" />
 				<br>
 			</div>
 
 			<div class="col-lg-2">
 				<label for="norte">Norte:</label>
-				<input class="form-control" name="norte" value="{{old('norte')}}" />
+				<input class="form-control" name="norte" value="{{$tomaAgua->medidasDensiometro->norte}}" />
 				<br>
 			</div>
 
 			<div class="col-lg-2">
 				<label for="sur">Sur:</label>
-				<input class="form-control" name="sur" value="{{old('sur')}}"/>
+				<input class="form-control" name="sur" value="{{$tomaAgua->medidasDensiometro->sur}}"/>
 				<br>
 			</div>
 
 			<div class="col-lg-2">
 				<label for="este">Este:</label>
-				<input class="form-control" name="este" value="{{old('este')}}"/>
+				<input class="form-control" name="este" value="{{$tomaAgua->medidasDensiometro->este}}"/>
 				<br>
 			</div>
 
 			<div class="col-lg-2">
 				<label for="oeste">Oeste:</label>
-				<input class="form-control" name="oeste" value="{{old('oeste')}}"/>
+				<input class="form-control" name="oeste" value="{{$tomaAgua->medidasDensiometro->oeste}}"/>
 				<br>
 			</div>
 		</div>
@@ -440,55 +483,55 @@
 	<div class="panel-body " id="collapseFisicoQuimico">
 
 
-		@for($i = 1 ; $i<=3 ; $i++)
-		<h4>Toma #{{$i}}:</h4>
+		@foreach($tomaAgua->fisicoQuimico as $fisicoQuimico)
+		<h4>Toma #{{$fisicoQuimico->numero_repeticion}}:</h4>
 		<div class="row">
 			<div class="col-lg-2">
-				<label for="oxigeno_miligramos_litro{{$i}}">O2 (mg/L):</label>
-				<input type="number" step="0.01" min="0" class="form-control" name="oxigeno_miligramos_litro{{$i}}" value="{{old('oxigeno_miligramos_litro'.$i)}}" />
+				<label for="oxigeno_miligramos_litro{{$fisicoQuimico->numero_repeticion}}">O2 (mg/L):</label>
+				<input type="number" step="0.01" min="0" class="form-control" name="oxigeno_miligramos_litro{{$fisicoQuimico->numero_repeticion}}" value="{{$fisicoQuimico->oxigeno_miligramos_litro}}" />
 				<br>
 			</div>
 
 			<div class="col-lg-1">
-				<label for="oxigeno_porcentaje{{$i}}">O2 (%):</label>
-				<input type="number" step="0.01" min="0"  class="form-control" name="oxigeno_porcentaje{{$i}}" value="{{old('oxigeno_porcentaje'.$i)}}"/>
+				<label for="oxigeno_porcentaje{{$fisicoQuimico->numero_repeticion}}">O2 (%):</label>
+				<input type="number" step="0.01" min="0"  class="form-control" name="oxigeno_porcentaje{{$fisicoQuimico->numero_repeticion}}" value="{{$fisicoQuimico->oxigeno_porcentaje}}"/>
 				<br>
 			</div>
 
 			<div class="col-lg-2">
-				<label for="temperatura{{$i}}">T (°C):</label>
-				<input type="number" step="0.01"   class="form-control" name="temperatura{{$i}}" value="{{old('temperatura'.$i)}}"/>
+				<label for="temperatura{{$fisicoQuimico->numero_repeticion}}">T (°C):</label>
+				<input type="number" step="0.01"   class="form-control" name="temperatura{{$fisicoQuimico->numero_repeticion}}" value="{{$fisicoQuimico->temperatura}}"/>
 				<br>
 			</div>
 
 			<div class="col-lg-1">
-				<label for="ph{{$i}}">pH:</label>
-				<input type="number" step="0.01" min="0" class="form-control" name="ph{{$i}}" value="{{old('ph'.$i)}}"/>
+				<label for="ph{{$fisicoQuimico->numero_repeticion}}">pH:</label>
+				<input type="number" step="0.01" min="0" class="form-control" name="ph{{$fisicoQuimico->numero_repeticion}}" value="{{$fisicoQuimico->ph}}"/>
 				<br>
 			</div>
 
 			<div class="col-lg-2">
-				<label for="conductividad{{$i}}">Conduct. (uS/cm):</label>
-				<input type="number" step="0.01" min="0" class="form-control" name="conductividad{{$i}}" value="{{old('conductividad'.$i)}}"/>
+				<label for="conductividad{{$fisicoQuimico->numero_repeticion}}">Conduct. (uS/cm):</label>
+				<input type="number" step="0.01" min="0" class="form-control" name="conductividad{{$fisicoQuimico->numero_repeticion}}" value="{{$fisicoQuimico->conductividad}}"/>
 				<br>
 			</div>
 
 			<div class="col-lg-2">
-				<label for="sst{{$i}}">SST (mg/L):</label>
-				<input type="number" step="0.01" min="0" class="form-control" name="sst{{$i}}" value="{{old('sst'.$i)}}"/>
+				<label for="sst{{$fisicoQuimico->numero_repeticion}}">SST (mg/L):</label>
+				<input type="number" step="0.01" min="0" class="form-control" name="sst{{$fisicoQuimico->numero_repeticion}}" value="{{$fisicoQuimico->sst}}"/>
 				<br>
 			</div>
 
 			<div class="col-lg-2">
-				<label for="salinidad{{$i}}">Salinidad (ppm):</label>
-				<input type="number" step="0.01" min="0"  class="form-control" name="salinidad{{$i}}" value="{{old('salinidad'.$i)}}"/>
+				<label for="salinidad{{$fisicoQuimico->numero_repeticion}}">Salinidad (ppm):</label>
+				<input type="number" step="0.01" min="0"  class="form-control" name="salinidad{{$fisicoQuimico->numero_repeticion}}" value="{{$fisicoQuimico->salinidad}}"/>
 				<br>
 			</div>
 
 		</div>
 		<!-- fin row -->
 		<hr>
-		@endfor
+		@endforeach
 
 	</div>
 	<!-- Fin body -->
@@ -504,7 +547,7 @@
 			<div class="col-lg-4">
 				<label for="coliformes">¿Presencia de coliformes?</label>&nbsp &nbsp 
 				Sí 
-				@if(old('coliformes') == "Si")
+				@if($tomaAgua->coliformes == "Si")
 				<input type="radio" name="coliformes" value="Si"  checked/>
 				No <input type="radio" name="coliformes" value="No" />
 				@else
@@ -517,7 +560,7 @@
 
 			<div class="col-lg-8">
 				<label for="observaciones"><strong>Observaciones:</strong></label>
-				<textarea name="observaciones" class="form-control" rows="5">{{old('observaciones')}}</textarea>
+				<textarea name="observaciones" class="form-control" rows="5">{{$tomaAgua->observaciones}}</textarea>
 			</div>
 		</div>
 
@@ -531,7 +574,13 @@
 <!-- Submit button -->
 <div class="row" >
 	<div class="col-lg-2">
-		{!!Form::submit('Guardar Toma' , ['class' => 'btn btn-success form-control' , 'data-dismiss' => 'modal']) !!}
+		<br>
+		{!!Form::button("<i class='glyphicon glyphicon-edit'></i> Actualizar Toma" , ['class' => 'btn btn-success form-control' , 'data-dismiss' => 'modal' , 'type' => 'submit']) !!}
+	</div>
+	
+	<div class="col-lg-2">
+		<br>
+		{!!Form::button('<i class="glyphicon glyphicon-remove"></i> Cancelar' , ['class' => 'btn btn-danger form-control' , 'data-toggle' => 'modal' , 'data-target'=>'#confirmarCancelacion']) !!}
 	</div>
 </div>
 
@@ -540,6 +589,38 @@
 
 <br><br><br><br><br><br><br>
 
+
+<!-- Modal para confirmar la cancelacion de la actualizacion -->
+
+<div class="modal fade" id="confirmarCancelacion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      
+      <div class="modal-body">
+      	<br><br>
+      	<div class="row">
+      		<div class="col-lg-12 text-center">
+      			<strong>¿Desea cancelar la actualización de la toma?</strong>
+      		</div>
+      	</div>
+        	
+        <br>
+        <div class="row ">
+        	<div class="col-lg-4 col-lg-offset-2">
+        		<button type="button" class="btn btn-default btn-block" data-dismiss="modal">No</button>
+        		<br>
+        	</div>
+
+        	<div class="col-lg-4">
+        		<a href="/tomas/Aguas" class="btn btn-danger btn-block">Cancelar</a>
+        	</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Fin Modal -->
 
 <script>
 /*

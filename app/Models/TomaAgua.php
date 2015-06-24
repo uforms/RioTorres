@@ -14,6 +14,8 @@ class TomaAgua extends Model {
 
 	protected $dates = ['deleted_at'];
 
+	
+
 	protected $fillable = [
 				'sitio_id',
 				'user_id',

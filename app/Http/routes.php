@@ -29,7 +29,7 @@ Route::post('tomas/crear/Suelos','SuelosController@store');
 
 Route::get('tomas/editar/Aguas/{tomaId}' , 'AguasController@edit');
 
-Route::post('tomas/editar/Aguas' , 'AguasController@');
+Route::post('tomas/editar/Aguas' , 'AguasController@update');
 
 Route::get('/gps','GpsController@index');
 
