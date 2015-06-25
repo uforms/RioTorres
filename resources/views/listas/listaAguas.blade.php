@@ -9,29 +9,30 @@
 <div class="panel panel-primary">
 	<div class="panel-heading panel-heading-custom" data-toggle="collapse" href="#collapseToma{{$tomaAgua->id}}" aria-expanded="false" aria-controls="collapseToma{{$tomaAgua->id}}">
 		<div class="row">
-			<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+			<div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
 				<strong><strong class="glyphicon glyphicon-resize-full"></strong>&nbsp &nbsp Toma #: {{$tomaAgua->id}} </strong>
 			</div>
 
-			<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+			<div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
 				<p><strong>Fecha: </strong>  {{($tomaAgua->fecha)}}</p>
 			</div>
+		
 
-			<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+			<div class="col-lg-2 col-md-2 col-sm-2 hidden-xs">
 				<p><strong>Hora Inicial: </strong>  {{$tomaAgua->hora_inicial}}</p>
 			</div>
 
 
-			<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+			<div class="col-lg-2 col-md-2 col-sm-2 hidden-xs">
 				<p><strong>Hora Final: </strong>  {{$tomaAgua->hora_final}}</p>
 			</div>
 
-			<div class="col-lg-2 col-md-4 col-sm-4 col-xs-12">
+			<div class="col-lg-2 col-md-4 col-sm-4 hidden-xs">
 
 				<p><strong>Sitio: </strong>  {{$tomaAgua->sitio->name}}</p>
 			</div>
 
-			<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+			<div class="col-lg-2 col-md-2 col-sm-2 hidden-xs">
 				<p><strong>Por: </strong>  {{$tomaAgua->user->name}}</p>
 			</div>
 		</div>
@@ -50,6 +51,23 @@
 
 		<h4>Información Básica: </h4>
 		<div class="row">
+
+			<div class="hidden-lg hidden-md hidden-sm col-xs-12 ">
+				<p><strong>Realizada por: </strong>  {{$tomaAgua->user->name}}</p>
+			</div>
+
+			<div class="hidden-lg hidden-md hidden-sm col-xs-12 ">
+				<p><strong>Hora Inicial: </strong>  {{$tomaAgua->hora_inicial}}</p>
+			</div>
+
+			<div class="hidden-lg hidden-md hidden-sm col-xs-12 ">
+				<p><strong>Hora Final: </strong>  {{$tomaAgua->hora_final}}</p>
+			</div>
+
+			<div class="hidden-lg hidden-md hidden-sm col-xs-12 ">
+				<p><strong>Sitio: </strong>  {{$tomaAgua->sitio->name}}</p>
+			</div>
+		
 			<div class="col-lg-2">
 				<strong>Latitud: </strong> {{$tomaAgua->lat}}
 				<br>
