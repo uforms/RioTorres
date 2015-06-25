@@ -12,7 +12,6 @@ class CreateFisicoQuimicosTable extends Migration {
 			$table->timestamps();
 			$table->softDeletes();
 			$table->integer('toma_agua_id')->unsigned();
-			$table->integer('numero_repeticion');
 			$table->float('oxigeno_miligramos_litro');
 			$table->float('oxigeno_porcentaje');
 			$table->float('temperatura');

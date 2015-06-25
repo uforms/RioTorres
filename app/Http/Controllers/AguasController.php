@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 
 use Request;
 use Auth;
+use DB;
 
 use App\Models\Sitio;
 use App\Models\Epoca;
@@ -122,22 +123,22 @@ class AguasController extends Controller {
 		//validar datos
 		$validator = Validator::make($input, [
 
-				'hora_inicial'				=>	'required | string',
-				'hora_final'				=>	'required | string',
-				'fecha'						=>	'required | string',
-				'sitio_id'					=>	'required',
-				'lat'						=>	'required',
-				'lng'						=>	'required',
-				'temperatura'				=>	'numeric',
-				'viento'					=>	'numeric',
-				'humedad'					=>	'numeric',
-				'clima_id'					=>	'integer',
-				'curso_id'					=>	'integer',
-				'parametro_nivel_id'		=>	'integer',
-				'mo_id'						=>	'integer',
-				'trabajo_ingenieril_id'		=>	'integer',
-				'estructura_banco_id'		=>	'integer',
-				'observacion_estructura_banco'		=>	'string',
+				'hora_inicial'					=>	'required | string',
+				'hora_final'					=>	'required | string',
+				'fecha'							=>	'required | string',
+				'sitio_id'						=>	'required',
+				'lat'							=>	'required',
+				'lng'							=>	'required',
+				'temperatura'					=>	'numeric',
+				'viento'						=>	'numeric',
+				'humedad'						=>	'numeric',
+				'clima_id'						=>	'integer',
+				'curso_id'						=>	'integer',
+				'parametro_nivel_id'			=>	'integer',
+				'mo_id'							=>	'integer',
+				'trabajo_ingenieril_id'			=>	'integer',
+				'estructura_banco_id'			=>	'integer',
+				'observacion_estructura_banco'	=>	'string',
     	]);
 
     	if ($validator->fails())
@@ -255,7 +256,6 @@ class AguasController extends Controller {
 		for ($i=1; $i <=$cantTomasFisicoQuimico ; $i++) { 
 			$fisicoQuimico = new FisicoQuimico();
 
-			$fisicoQuimico->numero_repeticion 			= $i;
 			$fisicoQuimico->toma_agua_id				= $tomaAgua->id;
 			$fisicoQuimico->oxigeno_miligramos_litro 	= $input['oxigeno_miligramos_litro'.$i]; 
 			$fisicoQuimico->oxigeno_porcentaje			= $input['oxigeno_porcentaje'.$i];
@@ -351,23 +351,30 @@ class AguasController extends Controller {
 	 */
 	public function update()
 	{
-		$input 							= Request::all();
-		$tiposCauces 					= TipoCauce::all();
-		$tiposSustratos 				= TipoSustrato::all();
-		$tiposCondicionesSustratos 		= TipoCondicionSustrato::all();
-		$tiposExposicionesCauce			= TipoExposicionCauce::all();
-		$tiposAmbientesAsociados 		= TipoAmbienteAsociado::all();
-		$tiposRiberas 					= TipoRibera::all();
 
+		//ToFix not catching Exceptions
+		try {
+			$input 							= Request::all();
+			$tiposCauces 					= TipoCauce::all();
+			$tiposSustratos 				= TipoSustrato::all();
+			$tiposCondicionesSustratos 		= TipoCondicionSustrato::all();
+			$tiposExposicionesCauce			= TipoExposicionCauce::all();
+			$tiposAmbientesAsociados 		= TipoAmbienteAsociado::all();
+			$tiposRiberas 					= TipoRibera::all();
 
-		// Obteniendo modelos a modificar
-		$tomaAgua 						= TomaAgua::find($input['tomaId']);
-		$generalidades 					= Generalidad::where('toma_agua_id' , '=' ,$tomaAgua->id  )->firstOrFail();
-		$vegetacion 					= Vegetacion::where('toma_agua_id' , '=' , $tomaAgua->id  )->firstOrFail();
-		$caracterizacionVisual			= CaracterizacionVisual::where('toma_agua_id' , '=' , $tomaAgua->id)->firstOrFail();
-		$medidaDensiometro 				= MedidaDensiometro::where('toma_agua_id' , '=' , $tomaAgua->id)->firstOrFail();
-		$fisicoQuimicos 				= FisicoQuimico::where('toma_agua_id' , '=' , $tomaAgua->id)->get();
+			// Obteniendo modelos a modificar
+			$tomaAgua 						= TomaAgua::find($input['tomaId']);
+			$generalidades 					= Generalidad::where('toma_agua_id' , '=' ,$tomaAgua->id  )->firstOrFail();
+			$vegetacion 					= Vegetacion::where('toma_agua_id' , '=' , $tomaAgua->id  )->firstOrFail();
+			$caracterizacionVisual			= CaracterizacionVisual::where('toma_agua_id' , '=' , $tomaAgua->id)->firstOrFail();
+			$medidaDensiometro 				= MedidaDensiometro::where('toma_agua_id' , '=' , $tomaAgua->id)->firstOrFail();
+			$fisicoQuimicos 				= FisicoQuimico::where('toma_agua_id' , '=' , $tomaAgua->id)->get();
 
+		} catch (Exception $e) {
+			return "Error";
+		}
+
+		
 		/*
 		|	Modificacion de Modelos con valores multiples
 		*/
@@ -458,8 +465,22 @@ class AguasController extends Controller {
 			}
 		}
 
-		foreach ($fisicoQuimicos as $fisicoQuimico) {
-			
+		//Datos FisicoQuimicos
+		$cantTomasFisicoQuimico = $input['cantTomasFisicoQuimicos'];
+		for ($i=1; $i <=$cantTomasFisicoQuimico ; $i++) { 
+			$fisicoQuimico = FisicoQuimico::find($input['fisicoQuimico_id'.$i]);
+
+			$fisicoQuimico->toma_agua_id				= $tomaAgua->id;
+			$fisicoQuimico->oxigeno_miligramos_litro 	= $input['oxigeno_miligramos_litro'.$i]; 
+			$fisicoQuimico->oxigeno_porcentaje			= $input['oxigeno_porcentaje'.$i];
+			$fisicoQuimico->temperatura					= $input['temperatura'.$i];
+			$fisicoQuimico->ph 							= $input['ph'.$i];
+			$fisicoQuimico->conductividad 				= $input['conductividad'.$i];
+			$fisicoQuimico->sst 						= $input['sst'.$i];
+			$fisicoQuimico->salinidad 					= $input['salinidad'.$i];
+
+			$fisicosQuimicos[] = $fisicoQuimico;
+
 		}
 
 		/*
@@ -475,30 +496,55 @@ class AguasController extends Controller {
 		/*
 		|	Guardando modelos
 		*/
-		$tomaAgua 					->save();
-		$generalidades 				->save();
-		$vegetacion 				->save();
-		$caracterizacionVisual 		->save();
-		$medidaDensiometro 			->save();
+		DB::transaction(function() use (
+											$tomaAgua,
+											$generalidades,
+											$vegetacion,
+											$caracterizacionVisual,
+											$medidaDensiometro,
+											$valoresCauces,
+											$porcentajesComposicionesSustratos,
+											$porcentajesCondicionesSustratos,
+											$porcentajesExposicionesCauce,
+											$porcentajesTiposRiberas,
+											$porcentajesAmbientesAsociados,
+											$fisicosQuimicos
+										) 
+		{
 
-		foreach($valoresCauces as $valorCauce){
-			$valorCauce->save();
-		}
-		foreach($porcentajesComposicionesSustratos as $porcentajeComposicionSustrato){
-			$porcentajeComposicionSustrato->save();
-		}
-		foreach($porcentajesCondicionesSustratos as $porcentajeCondicionSustrato){
-			$porcentajeCondicionSustrato->save();
-		}
-		foreach($porcentajesExposicionesCauce as $porcentajeExposicionCauce){
-			$porcentajeExposicionCauce->save();
-		}
-		foreach($porcentajesTiposRiberas as $porcentajeTipoRibera){
-			$porcentajeTipoRibera->save();
-		}
-		foreach($porcentajesAmbientesAsociados as $porcentajeAmbienteAsociado){
-				$porcentajeAmbienteAsociado->save();
-		}
+				$tomaAgua 					->save();
+				$generalidades 				->save();
+				$vegetacion 				->save();
+				$caracterizacionVisual 		->save();
+				$medidaDensiometro 			->save();
+
+				foreach($valoresCauces as $valorCauce){
+					$valorCauce->save();
+				}
+				foreach($porcentajesComposicionesSustratos as $porcentajeComposicionSustrato){
+					$porcentajeComposicionSustrato->save();
+				}
+				foreach($porcentajesCondicionesSustratos as $porcentajeCondicionSustrato){
+					$porcentajeCondicionSustrato->save();
+				}
+				foreach($porcentajesExposicionesCauce as $porcentajeExposicionCauce){
+					$porcentajeExposicionCauce->save();
+				}
+				foreach($porcentajesTiposRiberas as $porcentajeTipoRibera){
+					$porcentajeTipoRibera->save();
+				}
+				foreach($porcentajesAmbientesAsociados as $porcentajeAmbienteAsociado){
+						$porcentajeAmbienteAsociado->save();
+				}
+				foreach ($fisicosQuimicos as $fisicoQuimico) {
+					$fisicoQuimico->save();
+				}
+
+		});//End DB::transaction
+
+		
+
+
 
 		return Redirect::back();
 	}
@@ -511,7 +557,32 @@ class AguasController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+		DB::transaction(function() use($id) {
+		$tomaAgua 							= TomaAgua::find($id)->firstOrFail();
+		$generalidad 						= Generalidad::where('toma_agua_id' , '=' ,$id  )->firstOrFail();
+		$vegetacion 						= Vegetacion::where('toma_agua_id' , '=' , $id  )->firstOrFail();
+		$caracterizacionVisual				= CaracterizacionVisual::where('toma_agua_id' , '=' , $id)->firstOrFail();
+		$medidaDensiometro 					= MedidaDensiometro::where('toma_agua_id' , '=' , $id)->firstOrFail();
+
+		$fisicoQuimicos 					= FisicoQuimico::where('toma_agua_id' , '=' , $id)->delete();
+		$porcentajesAmbientesAsociados		= PorcentajeAmbienteAsociado::where('vegetacion_id' , '=' , $vegetacion->id)->delete();
+		$porcentajesTiposRiberas			= PorcentajeTipoRibera::where('vegetacion_id' , '=' ,$vegetacion->id)->delete();
+		$porcentajesExposicionCauce 		= PorcentajeExposicionCauce::where('vegetacion_id' , '=' ,$vegetacion->id)->delete();
+		$valoresCauces						= ValorCauce::where('generalidad_id' ,'=' , $generalidad->id)->delete();
+		$porcentajesCondicionesSustratos	= PorcentajeCondicionSustrato::where('generalidad_id' , '=' , $generalidad->id)->delete();
+		$porcentajesComposicionesSustratos	= PorcentajeComposicionSustrato::where('generalidad_id' , '=' , $generalidad->id)->delete();
+
+		$tomaAgua 							->delete();
+		$generalidad 						->delete();
+		$vegetacion 						->delete();
+		$caracterizacionVisual				->delete();
+		$medidaDensiometro 					->delete();
+
+
+		});
+
+		$successMessage = "La toma #".$id." ha sido eliminada con éxito.";
+		return Redirect::back()->with('successMessage',$successMessage);
 	}
 
 }

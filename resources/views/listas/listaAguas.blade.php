@@ -44,7 +44,7 @@
 			<div class="col-lg-12  text-right ">
 				<a href="/tomas/editar/Aguas/{{$tomaAgua->id}}" title="Editar" class="btn btn-info btn-xs"><i class="glyphicon glyphicon-edit"></i></a>
 				&nbsp &nbsp
-				<a href="#" title="Eliminar" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove"></i></a>
+				<button href="#" title="Eliminar" class="btn btn-danger btn-xs btn-confirmarEliminarToma" data-toggle="modal" data-target="#confirmarEliminacion" value="{{$tomaAgua->id}}"><i class="glyphicon glyphicon-remove" ></i></button>
 			</div>	
 		</div>
 
@@ -286,9 +286,10 @@
 		<hr>
 		<h4>Físico Químicos: </h4>
 		<div class="row">
+			<?php $count=1;?>
 			@foreach($tomaAgua->fisicoQuimico as $fisicoQuimico)
 					<div class="col-lg-4">
-						<strong>Toma # {{$fisicoQuimico->numero_repeticion}}</strong>
+						<strong>Toma # {{$count}}</strong>
 						<ul>
 							<li><strong>O2 (mg/L): </strong> {{$fisicoQuimico->oxigeno_miligramos_litro}}	</li>
 							<li><strong>O2 (%): </strong> {{$fisicoQuimico->oxigeno_porcentaje}}	</li>
@@ -298,6 +299,7 @@
 							<li><strong>SST (mg/L): </strong> {{$fisicoQuimico->sst}}	</li>
 						</ul>
 					</div>
+			<?php $count++;?>
 			@endforeach
 		</div>
 		<!-- fin row -->
@@ -328,3 +330,43 @@
 	</div>
 </div>
 
+
+<!-- Modal para confirmar la Eliminacion de la Toma -->
+
+<div class="modal fade" id="confirmarEliminacion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      
+      <div class="modal-body">
+      	<br><br>
+      	<div class="row">
+      		<div class="col-lg-12 text-center">
+      			<strong id="msg-Eliminar">¿Desea eliminar la toma de agua?</strong>
+      		</div>
+      	</div>
+        	
+        <br>
+        <div class="row ">
+        	<div class="col-lg-4 col-lg-offset-2">
+        		<button type="button" class="btn btn-default btn-block" data-dismiss="modal">No</button>
+        		<br>
+        	</div>
+
+        	<div class="col-lg-4">
+        		<a href="/tomas/Aguas" class="btn btn-danger btn-block btn-EliminarToma">Eliminar</a>
+        	</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Fin Modal -->
+
+<script>
+	$('.btn-confirmarEliminarToma').on('click',function(){
+		var tomaId = $(this).attr("value");
+		$(".btn-EliminarToma").attr("href","/tomas/eliminar/Aguas/"+ tomaId);
+		$("#msg-Eliminar").text("¿Seguro que desea eliminar la toma de agua #"+tomaId+"?");
+	});
+</script>

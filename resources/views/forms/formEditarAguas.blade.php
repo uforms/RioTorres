@@ -482,55 +482,59 @@
 
 	<div class="panel-body " id="collapseFisicoQuimico">
 
-
+		<?php $count=1;?>
+		<input type="hidden" name="cantTomasFisicoQuimicos" value="{{count($tomaAgua->fisicoQuimico)}}">
 		@foreach($tomaAgua->fisicoQuimico as $fisicoQuimico)
-		<h4>Toma #{{$fisicoQuimico->numero_repeticion}}:</h4>
+		<h4>Toma #{{$count}}:</h4>
 		<div class="row">
+
+			<input type="hidden" name="fisicoQuimico_id{{$count}}" value="{{$fisicoQuimico->id}}">
 			<div class="col-lg-2">
-				<label for="oxigeno_miligramos_litro{{$fisicoQuimico->numero_repeticion}}">O2 (mg/L):</label>
-				<input type="number" step="0.01" min="0" class="form-control" name="oxigeno_miligramos_litro{{$fisicoQuimico->numero_repeticion}}" value="{{$fisicoQuimico->oxigeno_miligramos_litro}}" />
+				<label for="oxigeno_miligramos_litro{{$count}}">O2 (mg/L):</label>
+				<input type="number" step="0.01" min="0" class="form-control" name="oxigeno_miligramos_litro{{$count}}" value="{{$fisicoQuimico->oxigeno_miligramos_litro}}" />
 				<br>
 			</div>
 
 			<div class="col-lg-1">
-				<label for="oxigeno_porcentaje{{$fisicoQuimico->numero_repeticion}}">O2 (%):</label>
-				<input type="number" step="0.01" min="0"  class="form-control" name="oxigeno_porcentaje{{$fisicoQuimico->numero_repeticion}}" value="{{$fisicoQuimico->oxigeno_porcentaje}}"/>
+				<label for="oxigeno_porcentaje{{$count}}">O2 (%):</label>
+				<input type="number" step="0.01" min="0"  class="form-control" name="oxigeno_porcentaje{{$count}}" value="{{$fisicoQuimico->oxigeno_porcentaje}}"/>
 				<br>
 			</div>
 
 			<div class="col-lg-2">
-				<label for="temperatura{{$fisicoQuimico->numero_repeticion}}">T (°C):</label>
-				<input type="number" step="0.01"   class="form-control" name="temperatura{{$fisicoQuimico->numero_repeticion}}" value="{{$fisicoQuimico->temperatura}}"/>
+				<label for="temperatura{{$count}}">T (°C):</label>
+				<input type="number" step="0.01"   class="form-control" name="temperatura{{$count}}" value="{{$fisicoQuimico->temperatura}}"/>
 				<br>
 			</div>
 
 			<div class="col-lg-1">
-				<label for="ph{{$fisicoQuimico->numero_repeticion}}">pH:</label>
-				<input type="number" step="0.01" min="0" class="form-control" name="ph{{$fisicoQuimico->numero_repeticion}}" value="{{$fisicoQuimico->ph}}"/>
+				<label for="ph{{$count}}">pH:</label>
+				<input type="number" step="0.01" min="0" class="form-control" name="ph{{$count}}" value="{{$fisicoQuimico->ph}}"/>
 				<br>
 			</div>
 
 			<div class="col-lg-2">
-				<label for="conductividad{{$fisicoQuimico->numero_repeticion}}">Conduct. (uS/cm):</label>
-				<input type="number" step="0.01" min="0" class="form-control" name="conductividad{{$fisicoQuimico->numero_repeticion}}" value="{{$fisicoQuimico->conductividad}}"/>
+				<label for="conductividad{{$count}}">Conduct. (uS/cm):</label>
+				<input type="number" step="0.01" min="0" class="form-control" name="conductividad{{$count}}" value="{{$fisicoQuimico->conductividad}}"/>
 				<br>
 			</div>
 
 			<div class="col-lg-2">
-				<label for="sst{{$fisicoQuimico->numero_repeticion}}">SST (mg/L):</label>
-				<input type="number" step="0.01" min="0" class="form-control" name="sst{{$fisicoQuimico->numero_repeticion}}" value="{{$fisicoQuimico->sst}}"/>
+				<label for="sst{{$count}}">SST (mg/L):</label>
+				<input type="number" step="0.01" min="0" class="form-control" name="sst{{$count}}" value="{{$fisicoQuimico->sst}}"/>
 				<br>
 			</div>
 
 			<div class="col-lg-2">
-				<label for="salinidad{{$fisicoQuimico->numero_repeticion}}">Salinidad (ppm):</label>
-				<input type="number" step="0.01" min="0"  class="form-control" name="salinidad{{$fisicoQuimico->numero_repeticion}}" value="{{$fisicoQuimico->salinidad}}"/>
+				<label for="salinidad{{$count}}">Salinidad (ppm):</label>
+				<input type="number" step="0.01" min="0"  class="form-control" name="salinidad{{$count}}" value="{{$fisicoQuimico->salinidad}}"/>
 				<br>
 			</div>
 
 		</div>
 		<!-- fin row -->
 		<hr>
+		<?php $count++;?>
 		@endforeach
 
 	</div>

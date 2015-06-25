@@ -31,6 +31,8 @@ Route::get('tomas/editar/Aguas/{tomaId}' , 'AguasController@edit');
 
 Route::post('tomas/editar/Aguas' , 'AguasController@update');
 
+Route::get('tomas/eliminar/Aguas/{tomaId}' , 'AguasController@destroy');
+
 Route::get('/gps','GpsController@index');
 
 //Reports
