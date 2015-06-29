@@ -1,7 +1,7 @@
 {!!Form::open(['url' => '/tomas/editar/Aves' , 'files'=>true]) !!}
 
 <input type="hidden" name="tomaId" value="{{$tomaAve->id}}">
-<input type="hidden" name="aveId" value="{{$ave->id}}">
+<input type="hidden" name="ave_id" id="ave_id" value="{{$ave->id}}">
 
 <div class="panel panel-primary">
 	<div class="panel-heading panel-heading-custom" data-toggle="collapse" href="#collapseEspecificoAve" aria-expanded="false" aria-controls="collapseEspecificoAve"><strong class="glyphicon glyphicon-resize-full"></strong>&nbsp Específicos del Ave:</div>
@@ -349,13 +349,12 @@
 	<div class="panel-heading panel-heading-custom" data-toggle="collapse" href="#collapseImagen" aria-expanded="false" aria-controls="collapseImagen"><strong class="glyphicon glyphicon-resize-full"></strong>&nbsp Imágenes: </div>
 
 	<div class="panel-body" id="collapseImagen">
-
 		<div class="row">
 			@foreach($tomaAve->imagenesAves as $imagenAve)
 			<div class="col-xs-6 col-md-3">
 				<a  class="thumbnail thumbnail-aves-custom">
 					<p class="text-right p-aves-custom; " style="float:right;"> Eliminar 
-						{!! Form::checkbox("deleteImg_$imagenAve->id", true, false)!!}
+						{!! Form::checkbox("deleteImg_$imagenAve->id", true, false, ['class'=>'eliminarAveCheckBox'])!!}
 					</p>
 					<img src="/avesPics/{{$imagenAve->url}}" alt="{{$imagenAve->nombre}}">
 				</a>
@@ -573,9 +572,12 @@
 
 	$('#actualizarAve').click(function(){
 		$('#idAve').text(idAve);
-		$('#anilloAve').text(anilloAve);
+		if(anilloAve == 0) $('#anilloAve').text("Ave Migratoria.");
+		else $('#anilloAve').text(anilloAve);
 		$('#especieAve').text(especieAve);
 		$('#generoAve').text(generoAve);
+
+		$('#ave_id').val(idAve);
 	});
 
 	$('#crearAve').click(function(){
@@ -598,6 +600,7 @@
 
 		$('nuevaAve').append();
 	});
+	
 
 </script>
 

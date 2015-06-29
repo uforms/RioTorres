@@ -234,11 +234,12 @@ class AvesController extends Controller {
 	 */
 	public function update()
 	{
-		$input = Request::all();
-		$tomaAve = TomaAve::find($input['tomaId']);
-		$examenGeneral = ExamenGeneral::find($tomaAve->examen_general_id);
-		$medidaBiometrica = MedidaBiometrica::find($tomaAve->medida_biometrica_id);
-		$ave = Ave::find($tomaAve->ave_id);
+		$input 					= Request::all();
+		$tomaAve 				= TomaAve::find($input['tomaId']);
+		$examenGeneral 			= ExamenGeneral::find($tomaAve->examen_general_id);
+		$medidaBiometrica 		= MedidaBiometrica::find($tomaAve->medida_biometrica_id);
+		$ave 					= Ave::find($tomaAve->ave_id);
+		$imagenesAves 			= ImagenAve::where('toma_ave_id','=', $tomaAve->id)->get();
 
 		$tomaAve-> fill($input);
 		$examenGeneral->fill($input);
@@ -247,6 +248,13 @@ class AvesController extends Controller {
 		$tomaAve->save();
 		$examenGeneral->save();
 		$medidaBiometrica->save();
+
+		//Delete old Aves
+		foreach ($imagenesAves as $imagenAve) {
+			if(isset($input['deleteImg_'.$imagenAve->id])){
+				$imagenAve->delete();
+			}
+		}
 
 
 		//Add new Ave
