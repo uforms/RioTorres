@@ -16,6 +16,7 @@ class CreateTomasAvesTable extends Migration {
 			$table->integer('user_id')->unsigned();
 			$table->integer('epoca_id')->unsigned();
 			$table->text('observaciones')->nullable();
+			$table->string('fecha',20);
 			$table->timestamps();
 			$table->softDeletes();
 		});

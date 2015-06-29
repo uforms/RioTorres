@@ -86,3 +86,20 @@ body{
 .li-report-custom{
     width:33%;
 }
+
+.thumbnail-aves-custom{
+    color:#B40404;
+}
+
+.thumbnail-aves-custom:hover{
+    text-decoration: none;
+    cursor: pointer;
+    color: red;
+}
+
+.p-aves-custom{
+    position: absolute;
+    bottom: 0;
+    left: 0.5em;
+    width: 400px;
+}

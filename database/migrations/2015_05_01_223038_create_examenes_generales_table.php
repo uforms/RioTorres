@@ -10,7 +10,7 @@ class CreateExamenesGeneralesTable extends Migration {
 		Schema::create('examenes_generales', function(Blueprint $table) {
 			$table->increments('id');
 			$table->integer('red');
-			$table->integer('ol');
+			$table->integer('oj');
 			$table->integer('cao');
 			$table->integer('q');
 			$table->integer('ab');

@@ -6,7 +6,7 @@
 <div class="row custom-header">
 	<div class="container">
 	<div class="col-lg-12">
-		<h1 class="h1-custom">Actualizando toma # {{$tomaAgua->id}} de {{$type}}
+		<h1 class="h1-custom">Actualizando toma # {{$id}} de {{$type}}
 			<small></small>
 		</h1>
 	</div>

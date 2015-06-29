@@ -21,7 +21,7 @@
 		<div class="col-lg-6 col-lg-offset-6">
 			Seleccione el formato deseado:<br>
 
-			<input type="radio" name="format" required value="xlsx" />&nbsp<label for="format">Excel</label>&nbsp&nbsp&nbsp
+			<input type="radio" name="format" required checked value="xlsx" />&nbsp<label for="format">Excel</label>&nbsp&nbsp&nbsp
 
 			{!! Form::radio('format', 'csv')!!}&nbsp<label for="format">CSV</label><br>
 

@@ -23,6 +23,7 @@ class TomaAve extends Model {
 		'user_id',
 		'epoca_id',
 		'observaciones',
+		'fecha',
 	];
 
 	public function ave()

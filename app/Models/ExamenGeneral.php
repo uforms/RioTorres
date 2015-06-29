@@ -16,7 +16,7 @@ class ExamenGeneral extends Model {
 
 	protected $fillable = [
 		'red',
-		'ol',
+		'oj',
 		'cao',
 		'q',
 		'ab',

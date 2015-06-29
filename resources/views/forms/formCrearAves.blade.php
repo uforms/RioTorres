@@ -36,6 +36,12 @@
 				<br>
 			</div>
 		</div>
+
+		<div class="row">
+			<div class="col-lg-12" id="info-Remuestreo">
+
+			</div>
+		</div>
 	</div>
 </div>
 <!-- Fin panel1 -->
@@ -355,9 +361,10 @@
 <!-- Fin panel5 -->
 
 <div class="panel panel-primary">
-	<div class="panel-heading panel-heading-custom" data-toggle="collapse" href="#collapseImagen" aria-expanded="false" aria-controls="collapseImagen"><strong class="glyphicon glyphicon-resize-full"></strong>&nbsp Imágen: </div>
+	<div class="panel-heading panel-heading-custom" data-toggle="collapse" href="#collapseImagen" aria-expanded="false" aria-controls="collapseImagen"><strong class="glyphicon glyphicon-resize-full"></strong>&nbsp Imagen: </div>
 
 	<div class="panel-body " id="collapseImagen">
+
 		<div class="row">
 			<input type="hidden" value="1" name="cantidadImagenesPost" id="cantidadImagenesPost" />
 			<div class="col-lg-4 ">
@@ -375,7 +382,7 @@
 		
 		<div class="row">
 			<div class="col-lg-2">
-				<a class="btn btn-success" id="addImg"><i class="glyphicon glyphicon-plus"></i></a>
+				<a class="btn btn-success" id="addImg" title="Agregar nueva imagen"><i class="glyphicon glyphicon-plus"></i></a>
 			</div>
 		</div>
 	</div>
@@ -404,11 +411,21 @@ $('#numero_anillo').blur(function () {
 		type:'GET',
 		url: '/remuestreo/'+ numeroAnillo,
 		success: function(data){
-			console.log(data[0]);
-			if(data[0]!=null)
+			console.log(data['ave']);
+			if(data['ave']!=null)
 			{
-				$('#especie').val(data[0].especie);
-				$('#genero').val(data[0].genero);
+				$('#especie').val(data['ave'].especie);
+				$('#genero').val(data['ave'].genero);
+				var msg;
+				if(data['cantidadTomas'] == 0 ) 
+					msg = 'El ave con anillo # '+numeroAnillo+" se encuentra registrado en la base de datos, pero hay 0 tomas relacionadas.";
+				else if(data['cantidadTomas'] == 1 ) {
+					msg = 'El ave con anillo # '+numeroAnillo+" se ha muestreado "+data['cantidadTomas']+" vez.";
+				}else
+					msg = 'El ave con anillo # '+numeroAnillo+" se ha muestreado "+data['cantidadTomas']+" veces.";
+
+				
+				$('#info-Remuestreo').text(msg);
 				/*
 				$("#especie").prop('disabled', true);
 				$("#genero").prop('disabled', true);
@@ -416,6 +433,7 @@ $('#numero_anillo').blur(function () {
 			}else{
 				$('#especie').val("");
 				$('#genero').val("");
+				$('#info-Remuestreo').text('No hay registros relacionados con este anillo de ave.');
 				/*
 				$("#especie").prop('disabled', false);
 				$("#genero").prop('disabled', false);
@@ -429,6 +447,7 @@ $('#numero_anillo').blur(function () {
 <script>
 	$('#btnMigraSi').click(function(){
 		$('#numero_anillo').val("");
+		$('#info-Remuestreo').text("");
 		$("#numero_anillo").prop('disabled', true);
 		$("#especie").prop('disabled', false);
 		$("#genero").prop('disabled', false);

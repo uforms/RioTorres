@@ -28,10 +28,13 @@ Route::post('tomas/crear/Aves','AvesController@store');
 Route::post('tomas/crear/Suelos','SuelosController@store');
 
 Route::get('tomas/editar/Aguas/{tomaId}' , 'AguasController@edit');
+Route::get('tomas/editar/Aves/{tomaId}'	 , 'AvesController@edit');
 
 Route::post('tomas/editar/Aguas' , 'AguasController@update');
+Route::post('tomas/editar/Aves' , 'AvesController@update');
 
 Route::get('tomas/eliminar/Aguas/{tomaId}' , 'AguasController@destroy');
+Route::get('tomas/eliminar/Aves/{tomaId}' , 'AvesController@destroy');
 
 Route::get('/gps','GpsController@index');
 

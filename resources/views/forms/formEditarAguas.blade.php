@@ -616,7 +616,7 @@
         	</div>
 
         	<div class="col-lg-4">
-        		<a href="/tomas/Aguas" class="btn btn-danger btn-block">Cancelar</a>
+        		<a href="/tomas/Aguas" class="btn btn-danger btn-block">Sí, Cancelar</a>
         	</div>
         </div>
       </div>

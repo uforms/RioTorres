@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Validator;
 
 use Request;
 use Auth;
+use DB;
+
 //Models to use
 use App\Models\Ave;
 use App\Models\MedidaBiometrica;
@@ -93,11 +95,26 @@ class AvesController extends Controller {
 	    }
 
 	    // Identifica si es una re-muestreo para NO duplicar el Ave
-		if(Ave::find(Request::get('numero_anillo'))){
-			$ave = Ave::find(Request::get('numero_anillo'));
-		}else{
-			$ave = Ave::create($input);
-		}
+	    if(Request::get('numero_anillo') ) {
+	    	$numeroAnillo = Request::get('numero_anillo');
+	    	//Ave no migratoria
+	    	if(Ave::where('numero_anillo' , '=' , $numeroAnillo)->exists() ){
+				$ave = Ave::where('numero_anillo' , '=' , $numeroAnillo)->firstOrFail();
+			}else{
+				$ave = Ave::create($input);
+			}
+	    }else {
+	    	//Ave migratoria
+	    	/*
+	    	| To fix
+	    	| El problema que existe acá es que no hay forma de saber
+	    	| si el ave migratoria es recurrente o no, esto se 
+	    	| debería de conversar y tratar de resolver
+	    	*/
+	    	$ave = Ave::create($input);
+	    }
+	    
+	    
 
 		$medidaBiometrica 	= MedidaBiometrica::create($input);
 		$examenGeneral 		= ExamenGeneral::create($input); 
@@ -120,7 +137,7 @@ class AvesController extends Controller {
 				$imageInfo 		= new ImagenAve();
 				$imgCount		= count($tomaAve->imagenesAves->count());
 				//Getting date to add to pictures url
-				$date = date('Y-m-d_H:i:s');
+				$date = date('Y-m-d_H-i-s');
 
 				//To Fix, nombres de las aves para que NUNCA queden igual
 
@@ -157,9 +174,12 @@ class AvesController extends Controller {
 	}
 
 	public function Remuestra($numeroAnillo){
-		if(Ave::where('numero_anillo' , '=' , $numeroAnillo)->get()){
-			$ave = Ave::where('numero_anillo' , '=' , $numeroAnillo)->get();
-			return ($ave);
+		if(Ave::where('numero_anillo' , '=' , $numeroAnillo)->exists()){
+			$ave = Ave::where('numero_anillo' , '=' , $numeroAnillo)->first();
+			
+			$cantidadTomas = TomaAve::where('ave_id' , '=' , $ave->id)->count();
+			
+			return compact('ave','cantidadTomas');
 		}else{
 			return "";
 		}
@@ -185,7 +205,25 @@ class AvesController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+
+		$sitios  				= Sitio::all();
+		$epocas  				= Epoca::all();
+		$tomaAve 				= TomaAve::find($id); 		
+		$examenGeneral 			= ExamenGeneral::where('id' , '=' , $tomaAve->examen_general_id)->first();
+		$medidasBiometricas 	= MedidaBiometrica::where('id' , '=' , $tomaAve->medida_biometrica_id)->first();
+		$ave 					= Ave::where('id' ,'=' , $tomaAve->ave_id)->first();
+		$aves 					= Ave::all();
+
+		return view('tomas.update',compact(
+											'sitios',
+											'epocas',
+											'id',
+											'tomaAve',
+											'examenGeneral',
+											'medidasBiometricas',
+											'ave',
+											'aves'
+											))->with('type',$this->type);
 	}
 
 	/**
@@ -194,9 +232,62 @@ class AvesController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update()
 	{
-		//
+		$input = Request::all();
+		$tomaAve = TomaAve::find($input['tomaId']);
+		$examenGeneral = ExamenGeneral::find($tomaAve->examen_general_id);
+		$medidaBiometrica = MedidaBiometrica::find($tomaAve->medida_biometrica_id);
+		$ave = Ave::find($tomaAve->ave_id);
+
+		$tomaAve-> fill($input);
+		$examenGeneral->fill($input);
+		$medidaBiometrica->fill($input);
+
+		$tomaAve->save();
+		$examenGeneral->save();
+		$medidaBiometrica->save();
+
+
+		//Add new Ave
+		$cantidadImagenesPost = Request::get('cantidadImagenesPost');
+		for ($instanciaAve=1; $instanciaAve <=$cantidadImagenesPost ; $instanciaAve++) { 
+
+			$image 			= Request::file('img'.$instanciaAve);
+			if($image != null)
+			{
+				$imageInfo 		= new ImagenAve();
+				$imgCount		= count($tomaAve->imagenesAves->count());
+				//Getting date to add to pictures url
+				$date = date('Y-m-d_H-i-s');
+
+				//To Fix, nombres de las aves para que NUNCA queden igual
+
+				//Si se ingresa un nombre especifico para el ave
+				if($input['imgNombre'.$instanciaAve] != null)
+				{
+					$imageInfo->nombre 		= $input['imgNombre'.$instanciaAve];
+					$imageInfo->url 		= $date."_"."ave".$instanciaAve."_"."toma".$tomaAve->id."_".$imageInfo->nombre.".jpg"; 
+				}else //Si no se ingresa algun nombre especifico para el ave
+				{
+					$imageInfo->nombre 	= $image->getClientOriginalName();
+					$imageInfo->url 	= $date."_"."ave".$instanciaAve."_"."toma".$tomaAve->id."_".$imageInfo->nombre;
+				}
+
+				$imageInfo->ave_id 		= $ave->id;
+				$imageInfo->toma_ave_id = $tomaAve->id;
+				$imageInfo->save();
+
+				$image->move('avesPics',$imageInfo->url);
+			}
+		}//end for
+
+
+
+		$successMessage = "La toma de Ave #".$tomaAve->id." ha sido actualizada con éxito.";
+		return Redirect::to('/tomas/Aves')
+										->with('type',$this->type)
+										->with('successMessage',$successMessage);
 	}
 
 	/**
@@ -207,7 +298,19 @@ class AvesController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+		DB::transaction(function() use($id) {
+			$tomaAve 			= TomaAve::find($id);
+			$medidaBiometrica 	= MedidaBiometrica::find($tomaAve->medida_biometrica_id);
+			$examenGeneral 		= ExamenGeneral::find($tomaAve->examen_general_id);
+
+			$tomaAve->delete();
+			$medidaBiometrica->delete();
+			$examenGeneral->delete();
+		});
+
+		$successMessage = "La toma de Ave #".$id." ha sido eliminada con éxito.";
+		return Redirect::back()->with('successMessage',$successMessage);
 	}
+
 
 }

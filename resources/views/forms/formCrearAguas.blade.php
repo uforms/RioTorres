@@ -379,31 +379,31 @@
 		<div class="row">
 			<div class="col-lg-2">
 				<label for="factor_cobertura">Factor de Cobertura:</label>
-				<input class="form-control" name="factor_cobertura" value="1.04" />
+				<input type="number" step="0.01" min="0" class="form-control" name="factor_cobertura" value="1.04" />
 				<br>
 			</div>
 
 			<div class="col-lg-2">
 				<label for="norte">Norte:</label>
-				<input class="form-control" name="norte" value="{{old('norte')}}" />
+				<input type="number" step="0.01" min="0" class="form-control" name="norte" value="{{old('norte')}}" />
 				<br>
 			</div>
 
 			<div class="col-lg-2">
 				<label for="sur">Sur:</label>
-				<input class="form-control" name="sur" value="{{old('sur')}}"/>
+				<input type="number" step="0.01" min="0" class="form-control" name="sur" value="{{old('sur')}}"/>
 				<br>
 			</div>
 
 			<div class="col-lg-2">
 				<label for="este">Este:</label>
-				<input class="form-control" name="este" value="{{old('este')}}"/>
+				<input type="number" step="0.01" min="0" class="form-control" name="este" value="{{old('este')}}"/>
 				<br>
 			</div>
 
 			<div class="col-lg-2">
 				<label for="oeste">Oeste:</label>
-				<input class="form-control" name="oeste" value="{{old('oeste')}}"/>
+				<input type="number" step="0.01" min="0" class="form-control" name="oeste" value="{{old('oeste')}}"/>
 				<br>
 			</div>
 		</div>

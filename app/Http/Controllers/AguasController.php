@@ -297,6 +297,7 @@ class AguasController extends Controller {
 	 */
 	public function edit($id)
 	{
+
 		$type 						= 'Aguas';
 		$tomaAgua 					= TomaAgua::find($id);
 		$sitios 					= Sitio::all();
@@ -338,7 +339,8 @@ class AguasController extends Controller {
 											'contPuntuales',
 											'presenciasRs',
 											'coloresAgua',
-											'oloresAgua'
+											'oloresAgua',
+											'id'
 											))
 									->with('type',$this->type);
 	}
@@ -543,10 +545,10 @@ class AguasController extends Controller {
 		});//End DB::transaction
 
 		
-
-
-
-		return Redirect::back();
+		$successMessage = " La toma de aguas ha sido actualizada con éxito.";
+		return Redirect::to('/tomas/Aguas')
+										->with('type',$this->type)
+										->with('successMessage',$successMessage);
 	}
 
 	/**
